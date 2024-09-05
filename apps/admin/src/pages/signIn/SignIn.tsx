@@ -1,4 +1,4 @@
-export function Home() {
+export function SignIn() {
     const userId = "toto@toto.com";
     const userPassword = "toto";
 
