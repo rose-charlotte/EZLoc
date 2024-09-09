@@ -7,11 +7,14 @@ import { ProtectedRoute } from "./components/protectedRoute/ProtectedRoute";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
-        <Route path="/" element={<Layout />} errorElement={<Page404 />}>
+        //<Route path="/" element={<Layout />} errorElement={<Page404 />}>
+        <>
             <Route index element={<SignIn />} />
-            <Route path="/user" element={<ProtectedRoute />}>
-                <Route index element={<Home />} />
-            </Route>
-        </Route>
+            <Route path="/user" element={<Home />} />
+        </>
+        // <Route path="/user" element={<ProtectedRoute />}>
+        //     <Route index element={<Home />} />
+        // </Route>
+        //</Route>
     )
 );

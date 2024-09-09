@@ -19,13 +19,15 @@ export function Form<T>(props: FormProps<T>): ReactNode {
     };
 
     return (
-        <form onSubmit={onSubmit} method="POST" className="space-y-6">
-            {props.children}
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form onSubmit={onSubmit} method="POST" className="space-y-6">
+                {props.children}
 
-            <div>
-                <button type="submit">{props.submitLabel}</button>
-            </div>
-        </form>
+                <div>
+                    <button type="submit">{props.submitLabel}</button>
+                </div>
+            </form>
+        </div>
     );
 }
 
