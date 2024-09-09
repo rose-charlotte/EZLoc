@@ -3,18 +3,25 @@ import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
 
 export function SignIn() {
-    const navigate = useNavigate();
-    const id = "toto@toto.fr";
-    const password = "toto";
+    async function postData() {
+        const response = await fetch("http://localhost:3000");
+        const mss = await response.json();
+        console.log(mss);
+    }
+    // const navigate = useNavigate();
+    //const id = "toto@toto.fr";
+    //const password = "toto";
     function handleSubmit(e: HTMLFormElement) {
-        if (!e.id || !e.password) {
-            return alert("manque info");
-        }
-        if (e.id === id && e.password === password) {
-            navigate("/user");
-        } else {
-            alert("identifiant ou mot de passe invalide");
-        }
+        // if (!e.id || !e.password) {
+        //     return alert("manque info");
+        // }
+        // if (e.id === id && e.password === password) {
+        //     navigate("/user");
+        // } else {
+        //     alert("identifiant ou mot de passe invalide");
+        // }
+
+        postData();
     }
     return (
         <Form submitLabel="Submit" onSubmit={handleSubmit}>
