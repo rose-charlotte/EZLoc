@@ -1,10 +1,22 @@
 import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
-import { SignIn } from "models/SignIn";
+import { SignIn } from "models";
 
 export function SignInForm() {
+    async function postInfo(info: object) {
+        const response = await fetch("http://localhost:3000/user", {
+            method: "POST",
+            headers: { "content-Type": "application/json" },
+            body: JSON.stringify(info),
+        });
+        const mss = await response.json();
+        console.log("la reponse du back", mss);
+    }
     const onSubmit = (signIn: SignIn) => {
         console.log(`logged with email: ${signIn.email} and password: ${signIn.password}`);
+        console.log(signIn);
+        // postInfo({ email: "toto@toto.fr", password: "toto" });
+        postInfo({ email: signIn.email, password: signIn.password });
     };
 
     return (
