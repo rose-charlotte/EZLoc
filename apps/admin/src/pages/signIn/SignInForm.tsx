@@ -4,7 +4,7 @@ import { SignIn } from "models";
 
 export function SignInForm() {
     async function postInfo(info: object) {
-        const response = await fetch("http://localhost:3000/user", {
+        const response = await fetch(import.meta.env.VITE_API_ROOT + "user", {
             method: "POST",
             headers: { "content-Type": "application/json" },
             body: JSON.stringify(info),
@@ -15,7 +15,7 @@ export function SignInForm() {
     const onSubmit = (signIn: SignIn) => {
         console.log(`logged with email: ${signIn.email} and password: ${signIn.password}`);
         console.log(signIn);
-        // postInfo({ email: "toto@toto.fr", password: "toto" });
+
         postInfo({ email: signIn.email, password: signIn.password });
     };
 
