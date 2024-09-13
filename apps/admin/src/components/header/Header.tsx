@@ -1,38 +1,25 @@
-import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import style from "./Header.module.css";
 
 export function Header() {
-    const [title, setTitle] = useState("");
     const location = useLocation();
-    const locatedPage = location.pathname;
 
-    useEffect(() => {
-        switch (locatedPage) {
-            case "/":
-                setTitle("connexion");
-                break;
-            case "/location":
-                setTitle("location");
-                break;
-            case "/locataire":
-                setTitle("locataire");
-                break;
-            default:
-                setTitle("");
-        }
-    }, [locatedPage]);
-
-    console.log(location.pathname);
+    const title = getTitleFromUrl(location.pathname);
     return (
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-            <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h1 className="mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">EZLOC</h1>
-                {locatedPage && (
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                        {title}
-                    </h2>
-                )}
+        <div className={style.container}>
+            <div className={style.titleContainer}>
+                <h1 className={style.mainTitle}>EZLOC</h1>
+                <h2 className={style.title}>{title}</h2>
             </div>
         </div>
     );
 }
+const getTitleFromUrl = (url: string) => {
+    switch (url) {
+        case "/":
+            return "Page d'acceuil";
+
+        default:
+            throw new Error(" Page not found");
+    }
+};
