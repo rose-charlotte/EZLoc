@@ -1,6 +1,6 @@
 import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
-import { SignIn } from "models";
+import { SignIn } from "@models";
 import style from "./SignIn.module.css";
 
 export function SignInForm() {
