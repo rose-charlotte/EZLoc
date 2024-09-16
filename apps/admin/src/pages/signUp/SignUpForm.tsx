@@ -3,8 +3,8 @@ import { FormField } from "../../components/Form/FormField";
 
 export function SignUpForm() {
     // https://github.com/rose-charlotte/EZLoc/issues/57
-    async function postUser(userInfo: object) {
-        const res = await fetch(`${import.meta.env.VITE_API_ROUTE}/user`, {
+    async function postUser(userInfo: SignUp) {
+        const res = await fetch(`${import.meta.env.VITE_API_ROUTE}user`, {
             method: "POST",
             headers: { "content-Type": "application/json" },
             body: JSON.stringify(userInfo),
@@ -15,14 +15,7 @@ export function SignUpForm() {
     const onSubmit = (signUp: SignUp) => {
         console.log("submit", signUp);
 
-        postUser({
-            lastName: signUp.lastName,
-            firstName: signUp.firstName,
-            adress: signUp.adress,
-            phone: signUp.phone,
-            password: signUp.passWord,
-            passWordConfirm: signUp.passWordConfirm,
-        });
+        postUser(signUp);
     };
     return (
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -31,8 +24,8 @@ export function SignUpForm() {
                 <FormField<SignUp> label="Prénom" name="firstName" />
                 <FormField<SignUp> label="Adresse" name="adress" />
                 <FormField<SignUp> label="Tel" name="phone" />
-                <FormField<SignUp> label="Mot de passe" name="passWord" />
-                <FormField<SignUp> label="Confirmation du mot de passe" name="passWordConfirm" />
+                <FormField<SignUp> label="Mot de passe" name="password" />
+                <FormField<SignUp> label="Confirmation du mot de passe" name="passwordConfirm" />
             </Form>
         </div>
     );
@@ -44,6 +37,6 @@ export interface SignUp {
     firstName: string;
     adress: string;
     phone: string;
-    passWord: string;
-    passWordConfirm: string;
+    password: string;
+    passwordConfirm: string;
 }

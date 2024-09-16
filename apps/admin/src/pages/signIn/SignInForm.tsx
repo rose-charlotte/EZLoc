@@ -15,7 +15,7 @@ export function SignInForm() {
         console.log("la reponse du back", mss);
     }
     const onSubmit = (signIn: SignIn) => {
-        postInfo({ email: signIn.email, password: signIn.password });
+        postInfo(signIn);
     };
 
     return (
