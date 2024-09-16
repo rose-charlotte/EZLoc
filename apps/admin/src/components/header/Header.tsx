@@ -1,10 +1,11 @@
 import { useLocation } from "react-router-dom";
 import style from "./Header.module.css";
+import { EZLocRoutes } from "../../routes";
 
 export function Header() {
     const location = useLocation();
 
-    const title = getTitleFromUrl(location.pathname);
+    const title = getTitleFromUrl(location.pathname as EZLocRoutes);
     return (
         <div className={style.container}>
             <div className={style.titleContainer}>
@@ -14,18 +15,18 @@ export function Header() {
         </div>
     );
 }
-const getTitleFromUrl = (url: string) => {
-    switch (url) {
-        case "/":
+const getTitleFromUrl = (route: EZLocRoutes) => {
+    switch (route) {
+        case EZLocRoutes.Index:
             return "Page d'acceuil";
 
-        case "/signIn":
+        case EZLocRoutes.SignIn:
             return "Connexion";
 
-        case "/signUp":
+        case EZLocRoutes.SignUp:
             return "Création de connexion";
 
         default:
-            throw new Error("Page not found");
+            return route satisfies never;
     }
 };
