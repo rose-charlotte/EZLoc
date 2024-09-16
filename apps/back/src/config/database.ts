@@ -1,14 +1,15 @@
 import { connect } from "mongoose";
+import { logger } from "../logger";
 
 export const connectDB = async () => {
     try {
         await connect(process.env.MONGODB_URI);
-        console.log("MongoDB connected");
+        logger.debug("MongoDB connected");
     } catch (err) {
         if (err instanceof Error) {
-            console.error(err.message);
+            logger.error(err.message);
         } else {
-            console.error(err);
+            logger.error(err);
         }
     }
 };
