@@ -2,7 +2,7 @@ import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
 
 export function SignUpForm() {
-    //A remettre en parametre quand PR .env sera acceptée
+    // https://github.com/rose-charlotte/EZLoc/issues/57
     async function postUser(userInfo: object) {
         const res = await fetch(`${import.meta.env.VITE_API_ROUTE}/user`, {
             method: "POST",
