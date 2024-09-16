@@ -1,16 +1,21 @@
 import dotenv from "dotenv";
 
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 
-dotenv.config();
+import { connectDB } from "./config/database";
 
 import { UserRouter } from "./routes/userRouter";
+import { logger } from "./logger";
+
+connectDB();
 
 const PORT = process.env.PORT;
 const app = express();
 
-console.log(`port: ${PORT}`);
+logger.info(`port: ${PORT}`);
 
 app.use(cors());
 
@@ -22,4 +27,4 @@ app.get("/", (req, res) => {
     res.send("hello from the back end");
 });
 
-app.listen(PORT, () => console.log(`serveur lancé sur http://localhost:${PORT}`));
+app.listen(PORT, () => logger.info(`serveur lancé sur http://localhost:${PORT}`));

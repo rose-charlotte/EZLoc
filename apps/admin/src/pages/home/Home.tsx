@@ -7,6 +7,7 @@ export function Home() {
             <h1>Je suis la Home page</h1>
             <nav className={style.nav}>
                 <Link to="/signUp">Création de compte</Link>
+                <Link to="/signIn">Connexion</Link>
             </nav>
         </>
     );

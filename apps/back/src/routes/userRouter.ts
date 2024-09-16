@@ -3,4 +3,4 @@ import { UserController } from "../controllers/userController";
 
 export const UserRouter = express.Router();
 
-UserRouter.post("/user", UserController.get);
+UserRouter.post("/user", UserController.createUser);
