@@ -19,7 +19,13 @@ const getTitleFromUrl = (url: string) => {
         case "/":
             return "Page d'acceuil";
 
+        case "/signIn":
+            return "Connexion";
+
+        case "/signUp":
+            return "Création de connexion";
+
         default:
-            throw new Error(" Page not found");
+            throw new Error("Page not found");
     }
 };
