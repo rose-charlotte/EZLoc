@@ -10,6 +10,7 @@ export function Form<T>(props: FormProps<T>): ReactNode {
 
         for (const entry of data.entries()) {
             Object.defineProperty(element, entry[0], {
+                enumerable: true,
                 value: entry[1],
                 writable: true,
             });
