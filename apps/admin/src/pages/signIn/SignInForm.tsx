@@ -5,8 +5,9 @@ import style from "./SignIn.module.css";
 
 export function SignInForm() {
     // https://github.com/rose-charlotte/EZLoc/issues/57
-    async function postInfo(info: object) {
-        const response = await fetch(import.meta.env.VITE_API_ROOT + "user", {
+
+    async function loggin(info: object) {
+        const response = await fetch(`${import.meta.env.VITE_API_ROUTE}loggin`, {
             method: "POST",
             headers: { "content-Type": "application/json" },
             body: JSON.stringify(info),
@@ -14,8 +15,11 @@ export function SignInForm() {
         const mss = await response.json();
         console.log("la reponse du back", mss);
     }
+
     const onSubmit = (signIn: SignIn) => {
-        postInfo(signIn);
+        console.log("submit", signIn);
+
+        loggin(signIn);
     };
 
     return (
