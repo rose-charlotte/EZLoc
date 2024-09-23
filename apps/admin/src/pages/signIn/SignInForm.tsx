@@ -2,20 +2,11 @@ import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
 import { SignIn } from "@models";
 import style from "./SignIn.module.css";
+import { postSignIn } from "../../data/userRepository";
 
 export function SignInForm() {
-    // https://github.com/rose-charlotte/EZLoc/issues/57
-    async function postInfo(info: object) {
-        const response = await fetch(import.meta.env.VITE_API_ROOT + "user", {
-            method: "POST",
-            headers: { "content-Type": "application/json" },
-            body: JSON.stringify(info),
-        });
-        const mss = await response.json();
-        console.log("la reponse du back", mss);
-    }
     const onSubmit = (signIn: SignIn) => {
-        postInfo(signIn);
+        postSignIn(signIn);
     };
 
     return (
