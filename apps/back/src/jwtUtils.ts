@@ -1,25 +1,22 @@
 import jwt from "jsonwebtoken";
+import { User } from "./models/user";
 
-export function generateToken(payload: object) {
+export function generateAccessToken(user: User): string {
     const secretKey = process.env.ACCESS_TOKEN_SECRET;
+
     const option = {
-        expiresIn: 5 * 60,
+        expiresIn: process.env.ACCESS_TOKEN_EXPIRATION_MINUTES * 60,
     };
-    if (!secretKey) {
-        return;
-    }
-    const accessToken = jwt.sign({ payload }, secretKey, option);
-    return accessToken;
+
+    return jwt.sign({ email: user.email }, secretKey, option);
 }
 
-export function generateRefreshToken(payload: object) {
+export function generateRefreshToken(user: User): string {
     const secretKey = process.env.REFRESH_TOKEN_SECRET;
+
     const option = {
-        expiresIn: "1D",
+        expiresIn: process.env.REFRESH_TOKEN_EXPIRATION_MINUTES * 60,
     };
-    if (!secretKey) {
-        return;
-    }
-    const refreshToken = jwt.sign({ payload }, secretKey, option);
-    return refreshToken;
+
+    return jwt.sign({ email: user.email }, secretKey, option);
 }
