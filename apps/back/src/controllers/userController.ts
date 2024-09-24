@@ -8,6 +8,7 @@ const saltRounds = 10;
 export const UserController = {
     async createUser(req: Request, res: Response) {
         try {
+            //https://github.com/rose-charlotte/EZLoc/issues/69
             const signUpRequest = req.body as SignUpRequest;
 
             const userExists = await User.countDocuments({ email: signUpRequest.email }, { limit: 1 });
@@ -28,7 +29,7 @@ export const UserController = {
 
             await user.save();
 
-            res.status(200).json(user);
+            res.status(201).json(user);
             logger.info(`user ${user} has been created in the base`);
         } catch (err) {
             logger.error(err);
