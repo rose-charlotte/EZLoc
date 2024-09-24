@@ -4,7 +4,7 @@ import { FormField } from "../../components/Form/FormField";
 
 export function SignUpForm() {
     //github.com/rose-charlotte/EZLoc/issues/68
-    async function postUser(userInfo: SignUpRequest) {
+    async function postSignUp(userInfo: SignUpRequest) {
         const res = await fetch(`${import.meta.env.VITE_API_ROUTE}user`, {
             method: "POST",
             headers: { "content-Type": "application/json" },
@@ -22,7 +22,7 @@ export function SignUpForm() {
 
         const signUp: SignUpRequest = { ...otherProps };
 
-        postUser(signUp);
+        postSignUp(signUp);
     };
     return (
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
