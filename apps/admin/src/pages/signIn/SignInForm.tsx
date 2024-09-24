@@ -1,6 +1,6 @@
 import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
-import { SignIn } from "@models";
+import { SignInRequest } from "@models";
 import style from "./SignIn.module.css";
 
 export function SignInForm() {
@@ -16,7 +16,7 @@ export function SignInForm() {
         console.log("la reponse du back", mss);
     }
 
-    const onSubmit = (signIn: SignIn) => {
+    const onSubmit = (signIn: SignInRequest) => {
         console.log("submit", signIn);
 
         loggin(signIn);
@@ -31,9 +31,9 @@ export function SignInForm() {
                 </div>
 
                 <div className={style.formContainer}>
-                    <Form<SignIn> onSubmit={onSubmit} submitLabel="Connexion">
-                        <FormField<SignIn> label="Identifiant" name="email" required type="email" />
-                        <FormField<SignIn>
+                    <Form<SignInRequest> onSubmit={onSubmit} submitLabel="Connexion">
+                        <FormField<SignInRequest> label="Identifiant" name="email" required type="email" />
+                        <FormField<SignInRequest>
                             label="Mot de passe"
                             name="password"
                             required
