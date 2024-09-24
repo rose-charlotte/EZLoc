@@ -8,18 +8,18 @@ export function generateToken(payload: object) {
     if (!secretKey) {
         return;
     }
-    const accessToken = jwt.sign(payload, secretKey, option);
+    const accessToken = jwt.sign({ payload }, secretKey, option);
     return accessToken;
 }
 
 export function generateRefreshToken(payload: object) {
     const secretKey = process.env.REFRESH_TOKEN_SECRET;
     const option = {
-        expiresIn: "1y",
+        expiresIn: "1D",
     };
     if (!secretKey) {
         return;
     }
-    const refreshToken = jwt.sign(payload, secretKey, option);
+    const refreshToken = jwt.sign({ payload }, secretKey, option);
     return refreshToken;
 }
