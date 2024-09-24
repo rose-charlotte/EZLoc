@@ -21,11 +21,6 @@ export function SignInForm() {
     return (
         <>
             <div className={style.container}>
-                <div className={style.titleContainer}>
-                    <h1 className={style.mainTitle}>EZLOC</h1>
-                    <h2 className={style.title}>Connexion</h2>
-                </div>
-
                 <div className={style.formContainer}>
                     <Form<SignInRequest> onSubmit={onSubmit} submitLabel="Connexion">
                         <FormField<SignInRequest> label="Identifiant" name="email" required type="email" />
@@ -43,7 +38,7 @@ export function SignInForm() {
                     </Form>
 
                     <p className={style.p}>
-                        Pas encore membre? <a href="#">Créer votre compte</a>
+                        Pas encore membre? <a href="/signUp">Créer votre compte</a>
                     </p>
                 </div>
             </div>
