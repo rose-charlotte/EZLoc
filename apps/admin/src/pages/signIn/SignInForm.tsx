@@ -54,7 +54,7 @@ export function SignInForm() {
                     </Form>
 
                     <p className={style.p}>
-                        Pas encore membre? <a href="#">Créer votre compte</a>
+                        Pas encore membre? <a href="/signUp">Créer votre compte</a>
                     </p>
                 </div>
             </div>
