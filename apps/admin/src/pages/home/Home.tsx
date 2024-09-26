@@ -8,6 +8,7 @@ export function Home() {
             <nav className={style.nav}>
                 <Link to="/signUp">Création de compte</Link>
                 <Link to="/signIn">Connexion</Link>
+                <Link to="/newRental">Ajouter un bien</Link>
             </nav>
         </>
     );

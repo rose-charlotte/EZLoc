@@ -7,6 +7,7 @@ import { SignUpForm } from "./pages/signUp/SignUpForm";
 import { SignInForm } from "./pages/signIn/SignInForm";
 import { Page404 } from "./pages/404/Page404";
 import { EZLocRoutes } from "./routes";
+import { NewRental } from "./pages/rentals/newRental/NewRental";
 
 export const router = createBrowserRouter(
     createRoutesFromElements(
@@ -14,6 +15,7 @@ export const router = createBrowserRouter(
             <Route index element={<Home />} />
             <Route path={EZLocRoutes.SignUp} element={<SignUpForm />} />
             <Route path={EZLocRoutes.SignIn} element={<SignInForm />} />
+            <Route path={EZLocRoutes.NewRental} element={<NewRental />} />
         </Route>
     )
 );
