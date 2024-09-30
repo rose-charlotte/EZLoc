@@ -10,7 +10,7 @@ export interface Rental {
     heating: string;
 }
 
-enum RentalTypes {
+export enum RentalTypes {
     Flat = "flat",
     House = "house",
     Studio = "studio",

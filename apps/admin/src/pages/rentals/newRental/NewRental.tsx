@@ -2,7 +2,6 @@ import { Rental } from "@models";
 import { Form } from "../../../components/Form/Form";
 import { FormField } from "../../../components/Form/FormField";
 import { SelectField } from "../../../components/commons/selectField/SelectField";
-import { SearchBar } from "../../../components/commons/searchBar/SearchBar";
 
 export function NewRental() {
     const rentalTypesOptions = [
@@ -21,7 +20,6 @@ export function NewRental() {
                 <FormField<Rental> label="Adresse" name="address" required />
                 <SelectField label="Type de bien" name="type" options={rentalTypesOptions} />
                 <FormField<Rental> label="Description" name="description" />
-                <SearchBar />
             </Form>
         </div>
     );
