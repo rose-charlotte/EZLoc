@@ -21,7 +21,13 @@ export function FormField<T>(props: FormFieldProps<T>): ReactNode {
                     required={props.required}
                     autoComplete={getAutoComplete()}
                     className={styles.field}
+                    placeholder={props.placeholder}
                 />
+                {/* {props.inputBtn && (
+                    <button className={styles.inlineBtn} onSubmit={props.onSubmit}>
+                        {props.inputBtnName}
+                    </button>
+                )} */}
             </div>
         </div>
     );
@@ -65,10 +71,12 @@ export function FormField<T>(props: FormFieldProps<T>): ReactNode {
     }
 }
 
-export interface FormFieldProps<T> {
-    label: string;
+export type FormFieldProps<T> = {
+    label?: string;
     labelHelp?: ReactNode;
     required?: boolean;
     name: keyof T;
     type?: "email" | "text" | "password" | "given-name" | "family-name";
-}
+    placeholder?: string;
+};
+//& ({ inputBtn: false } | { inputBtn: true; inputBtnName: string; onSubmit: () => void });

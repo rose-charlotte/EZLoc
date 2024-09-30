@@ -1,0 +1,67 @@
+.container {
+    @apply ring-indigo-600;
+}
+
+.label {
+    @apply mb-2 text-sm font-medium text-gray-900 sr-only;
+}
+
+.input {
+    @apply block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-600 focus:border-indigo-600;
+}
+
+.svg {
+    @apply absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none;
+}
+.button {
+    width: auto;
+    @apply text-white absolute end-2.5 bottom-2.5 bg-indigo-600 hover:bg-indigo-500 focus:ring-4 focus:outline-none  font-medium rounded-lg text-sm px-4 py-2;
+}
+
+.listItemContainer {
+    border: 1px solid rgb(79 70 229);
+    border-radius: 5px;
+    padding: 5px;
+    position: relative;
+    z-index: 1;
+    background-color: rgb(249 250 251);
+}
+
+.li {
+    cursor: pointer;
+}
+
+.elementContainer {
+    display: flex;
+    align-items: center;
+    gap: 10%;
+    width: 30%;
+    justify-content: space-between;
+}
+
+.closeBtn {
+    width: 15px;
+    padding: 0;
+}
+
+.mainContainer {
+    padding: 10px;
+    position: relative;
+    @apply mt-10 sm:mx-auto sm:w-full sm:max-w-sm;
+}
+.choosenItemContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5%;
+    position: absolute;
+    z-index: 0;
+    padding: 10px;
+    top: 72px;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.addBtn {
+    width: 20px;
+}

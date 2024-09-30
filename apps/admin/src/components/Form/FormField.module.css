@@ -3,6 +3,9 @@
 }
 
 .fieldContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
     @apply mt-2;
 }
 
@@ -12,4 +15,9 @@
 
 .labelContainer {
     @apply flex items-center justify-between;
+}
+
+.inlineBtn {
+    width: 50px;
+    position: fixed;
 }

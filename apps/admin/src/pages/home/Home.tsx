@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import style from "./Home.module.css";
+import { SearchBar } from "../../components/commons/searchBar/SearchBar";
 
 export function Home() {
     return (
@@ -10,6 +11,8 @@ export function Home() {
                 <Link to="/signIn">Connexion</Link>
                 <Link to="/newRental">Ajouter un bien</Link>
             </nav>
+
+            <SearchBar />
         </>
     );
 }
