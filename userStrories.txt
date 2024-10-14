@@ -1,0 +1,52 @@
+EN TANT QUE BAILLEUR:
+ - Je peux me connecter
+ - Je peux reinitialiser mon mot de passe en cas d'oublies
+ - Je peux créer un comptes
+ - Je peux modifier mes informations personnelles
+ - Je peux ajouter un ou des biens locatifs
+ - Je peux voir l'ensemble de mes biens locatifs
+ - Je peux modifier un bien locatif
+ - Je peux ajouter un ou des locataires
+ - Je peux affecter le locataire à un bien
+ - Je peux voir l'ensemble de mes locataires
+ - Je peux envoyer une invitation au locataire pour rejoindre l'application
+ - Je peux ajouter des photos
+ - Je peux ajouter des documents
+ - Je peux créer un contrat de location
+ - Je peux faire un états des lieux d'entrée
+ - Je peux faire un états des lieux de sortie
+ - Je peux ajouter des contrats
+ - Je peux créer des quittances de loyers
+ - Je peux indiqué si le loyer a été payé
+ - Je recois une alerte si loyer impayé à la date due
+ - Je recois une alerte lorsqu'un des locataires fait une demande d'interventions
+
+
+ - Je peux signer et faire signer ce contrat de location (peut être dans une V2)
+ - Je peux me connecter avec google... (v2)
+ - Je peux créer un candidats pour la location (V2)
+ - Je peux voir la liste des candidats pour une même location (V2)
+
+
+
+EN TANT QUE LOCATAIRE:
+ - Je peux créer un compte
+ - Je peux me connecter
+ - Je peux reinitialiser mon mot de passe en cas d'oublie
+ - Je peux ajouter des documents (pièce d'identité, assurance...) 
+ - Je peux voir mes contrats
+ - Je peux avoir mes quittances
+ - Je peux demander des quittances de loyers
+ - Je peux modifier mes informations personnelles
+ - Je peux demander une interventions si je rencontre un problème
+
+ - Je peux signer les contrats (V2)
+
+
+
+*Type USERS(idem pour le bailleur que pour le locataire):
+firstName
+lastName
+Address
+Mail
+Phone
