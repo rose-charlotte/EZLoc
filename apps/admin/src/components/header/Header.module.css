@@ -1,15 +1,15 @@
 .container {
-    @apply flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8;
 }
 
 .titleContainer {
-    @apply sm:mx-auto sm:w-full sm:max-w-sm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .mainTitle {
-    @apply mt-10 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900;
+    font-family: "Roboto";
 }
 
 .title {
-    @apply mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900;
 }
