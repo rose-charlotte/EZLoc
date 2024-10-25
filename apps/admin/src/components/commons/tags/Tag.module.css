@@ -1,0 +1,12 @@
+.tagContainer {
+    background-color: rgb(79 70 229);
+    color: white;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.tagsListContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
