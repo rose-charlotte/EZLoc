@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import { FormEvent, ReactNode } from "react";
 
 export function Form<T>(props: FormProps<T>): ReactNode {
@@ -20,13 +21,13 @@ export function Form<T>(props: FormProps<T>): ReactNode {
     };
 
     return (
-        <form onSubmit={onSubmit} method="POST" className="space-y-6">
+        <Box component="form" onSubmit={onSubmit} method="POST" className="space-y-6">
             {props.children}
 
             <div>
                 <button type="submit">{props.submitLabel}</button>
             </div>
-        </form>
+        </Box>
     );
 }
 

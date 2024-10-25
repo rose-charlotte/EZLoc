@@ -1,29 +1,43 @@
 import { HTMLInputAutoCompleteAttribute, HTMLInputTypeAttribute, ReactNode, useId } from "react";
 
 import styles from "./FormField.module.css";
+import { TextField } from "@mui/material";
 
 export function FormField<T>(props: FormFieldProps<T>): ReactNode {
     const inputId: string = useId();
 
     return (
-        <div>
-            <div className={styles.labelContainer}>
-                <label htmlFor={inputId} className={styles.label}>
-                    {props.label}
-                </label>
-                {props.labelHelp}
-            </div>
-            <div className={styles.fieldContainer}>
-                <input
-                    id={inputId}
-                    name={props.name.toString()}
-                    type={getType()}
-                    required={props.required}
-                    autoComplete={getAutoComplete()}
-                    className={styles.field}
-                />
-            </div>
+        <div className={styles.labelContainer}>
+            <TextField
+                id={inputId}
+                label={props.label}
+                name={props.name.toString()}
+                type={getType()}
+                required={props.required}
+                autoComplete={getAutoComplete()}
+                className={styles.field}
+            />
+            {props.labelHelp}
         </div>
+
+        // <div>
+        //     <div className={styles.labelContainer}>
+        //         <label htmlFor={inputId} className={styles.label}>
+        //             {props.label}
+        //         </label>
+        //         {props.labelHelp}
+        //     </div>
+        //     <div className={styles.fieldContainer}>
+        //         <input
+        //             id={inputId}
+        //             name={props.name.toString()}
+        //             type={getType()}
+        //             required={props.required}
+        //             autoComplete={getAutoComplete()}
+        //             className={styles.field}
+        //         />
+        //     </div>
+        // </div>
     );
 
     function getAutoComplete(): HTMLInputAutoCompleteAttribute {

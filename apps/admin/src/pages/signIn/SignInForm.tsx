@@ -46,7 +46,7 @@ export function SignInForm() {
                             required
                             type="password"
                             labelHelp={
-                                <div className="text-sm">
+                                <div className={style.p}>
                                     <a href="#">Mot de passe oublié?</a>
                                 </div>
                             }
