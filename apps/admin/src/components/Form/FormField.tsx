@@ -19,25 +19,6 @@ export function FormField<T>(props: FormFieldProps<T>): ReactNode {
             />
             {props.labelHelp}
         </div>
-
-        // <div>
-        //     <div className={styles.labelContainer}>
-        //         <label htmlFor={inputId} className={styles.label}>
-        //             {props.label}
-        //         </label>
-        //         {props.labelHelp}
-        //     </div>
-        //     <div className={styles.fieldContainer}>
-        //         <input
-        //             id={inputId}
-        //             name={props.name.toString()}
-        //             type={getType()}
-        //             required={props.required}
-        //             autoComplete={getAutoComplete()}
-        //             className={styles.field}
-        //         />
-        //     </div>
-        // </div>
     );
 
     function getAutoComplete(): HTMLInputAutoCompleteAttribute {
