@@ -1,16 +1,27 @@
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import style from "./Header.module.css";
 import { EZLocRoutes } from "../../routes";
+import CottageIcon from "@mui/icons-material/Cottage";
+import { useTheme } from "@mui/material";
+import { Link } from "../commons/link/Link";
 
 export function Header() {
+    const theme = useTheme();
     const location = useLocation();
 
     const title = getTitleFromUrl(location.pathname as EZLocRoutes);
     return (
         <div className={style.container}>
             <div className={style.titleContainer}>
-                <h1 className={style.mainTitle}>EZLOC</h1>
-                <h2 className={style.title}>{title}</h2>
+                <NavLink to="/" className={`${style.mainTitle} ${style.nav}`}>
+                    <CottageIcon fontSize="large" />
+                    <h1 style={theme.typography.h1}>EZLOC</h1>
+                </NavLink>
+                <h2 style={theme.typography.h2}>{title}</h2>
+                <nav className={style.nav}>
+                    <Link to="/signUp" name="Sign Up" />
+                    <Link to="/signIn" name="Sign In" />
+                </nav>
             </div>
         </div>
     );
@@ -30,3 +41,4 @@ const getTitleFromUrl = (route: EZLocRoutes) => {
             return route satisfies never;
     }
 };
+// className={style.title}

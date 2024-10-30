@@ -3,13 +3,32 @@
 
 .titleContainer {
     display: flex;
-    flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 .mainTitle {
-    font-family: "Roboto";
+    display: flex;
+    align-items: center;
+    width: 30%;
+    justify-content: space-around;
+    color: #6c85bd;
 }
 
-.title {
+.nav {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav {
+    display: flex;
+    width: 30%;
+    justify-content: space-around;
+}
+.active {
+    color: red;
+    font-size: x-large;
+}
+.inactive {
+    color: green;
 }
