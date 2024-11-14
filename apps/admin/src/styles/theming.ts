@@ -5,7 +5,7 @@ export const theme = createTheme({
         mode: "light",
         primary: {
             main: "#6c85bd",
-            light: "#c2c7d2",
+            light: "#ECEFF7",
             dark: "#4d5f87",
             contrastText: "#ffffff",
         },
@@ -38,9 +38,6 @@ export const theme = createTheme({
             light: "#57975b",
             dark: "#205723",
             contrastText: "#ffffff",
-        },
-        text: {
-            primary: "black",
         },
     },
     typography: {
