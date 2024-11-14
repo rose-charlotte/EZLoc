@@ -1,13 +1,18 @@
-import { Tag } from "./Tag";
-import style from "./Tag.module.css";
+import { Chip, Stack } from "@mui/material";
 
 export function TagsList(props: TagsListProps) {
+    const handleClick = () => {
+        console.log("je clique");
+    };
+    const handleDelete = () => {
+        console.log("je delete");
+    };
     return (
-        <div className={style.tagsListContainer}>
+        <Stack direction="row" spacing={1}>
             {props.tags.map((tag, index) => (
-                <Tag key={index} name={tag} />
+                <Chip color="primary" key={index} label={tag} onClick={handleClick} onDelete={handleDelete} />
             ))}
-        </div>
+        </Stack>
     );
 }
 
