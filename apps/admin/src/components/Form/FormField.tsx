@@ -16,7 +16,11 @@ export function FormField<T>(props: FormFieldProps<T>): ReactNode {
                 required={props.required}
                 autoComplete={getAutoComplete()}
                 className={styles.field}
+                onChange={e => props.onChange?.(e.currentTarget.value)}
+                onKeyDown={props.onKeyDown}
+                value={props.value}
             />
+
             {props.labelHelp}
         </div>
     );
@@ -66,4 +70,7 @@ export interface FormFieldProps<T> {
     required?: boolean;
     name: keyof T;
     type?: "email" | "text" | "password" | "given-name" | "family-name";
+    onChange?: (value: string | undefined) => void;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    value?: string;
 }

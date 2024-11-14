@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { FormEvent, ReactNode } from "react";
+import style from "./FormField.module.css";
 
 export function Form<T>(props: FormProps<T>): ReactNode {
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -21,11 +22,13 @@ export function Form<T>(props: FormProps<T>): ReactNode {
     };
 
     return (
-        <Box component="form" onSubmit={onSubmit} method="POST" className="space-y-6">
+        <Box component="form" onSubmit={onSubmit} method="POST">
             {props.children}
 
-            <div>
-                <button type="submit">{props.submitLabel}</button>
+            <div className={style.btn}>
+                <Button variant="contained" type="submit">
+                    {props.submitLabel}
+                </Button>
             </div>
         </Box>
     );
