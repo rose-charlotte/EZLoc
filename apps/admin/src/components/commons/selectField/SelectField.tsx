@@ -9,11 +9,12 @@ export function SelectField(props: SelectFieldProps) {
     const handleChange = (e: SelectChangeEvent) => {
         setValue(e.target!.value as string);
     };
+
     return (
-        <Box sx={{ minWidth: 120 }}>
-            <FormControl sx={{ minWidth: 120 }}>
+        <Box>
+            <FormControl sx={{ width: 210 }}>
                 <InputLabel id={selectId}>{props.label}</InputLabel>
-                <Select labelId={selectId} id={selectId} value={value} label="Age" onChange={handleChange}>
+                <Select labelId={selectId} name={props.name} id={selectId} value={value} onChange={handleChange}>
                     {props.options.map(option => (
                         <MenuItem key={option.id} value={option.name}>
                             {option.name}
