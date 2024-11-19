@@ -21,6 +21,7 @@ export function Header() {
                 <nav className={style.nav}>
                     <Link to="/signUp" name="Sign Up" />
                     <Link to="/signIn" name="Sign In" />
+                    <Link to="/newRental" name="Ajouter un bien locatif" />
                 </nav>
             </div>
         </div>
@@ -36,6 +37,9 @@ const getTitleFromUrl = (route: EZLocRoutes) => {
 
         case EZLocRoutes.SignUp:
             return "Création de connexion";
+
+        case EZLocRoutes.NewRental:
+            return "Nouveau bien";
 
         default:
             return route satisfies never;
