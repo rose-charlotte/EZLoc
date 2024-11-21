@@ -1,7 +1,6 @@
 import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
 import { SignInErrorCode, SignInRequest, SignInResponse } from "@models";
-import style from "./SignIn.module.css";
 import { useState } from "react";
 
 export function SignInForm() {
@@ -34,10 +33,10 @@ export function SignInForm() {
 
     return (
         <>
-            <div className={style.container}>
+            <div>
                 {errorMessage && <div>{errorMessage}</div>}
 
-                <div className={style.formContainer}>
+                <div>
                     <Form<SignInRequest> onSubmit={login} submitLabel="Connexion">
                         <FormField<SignInRequest> label="Identifiant" name="email" required type="email" />
                         <FormField<SignInRequest>
@@ -46,14 +45,14 @@ export function SignInForm() {
                             required
                             type="password"
                             labelHelp={
-                                <div className={style.p}>
+                                <div>
                                     <a href="#">Mot de passe oublié?</a>
                                 </div>
                             }
                         />
                     </Form>
 
-                    <p className={style.p}>
+                    <p>
                         Pas encore membre? <a href="/signUp">Créer votre compte</a>
                     </p>
                 </div>
