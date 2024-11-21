@@ -8,7 +8,7 @@ import style from "./NewRental.module.css";
 import { useState } from "react";
 import { DropDownSearch } from "../../../components/commons/searchBar/DropDownSearch";
 import { TagsList } from "../../../components/commons/tags/TagsList";
-import { Room, Equipment, NewRental } from "@models";
+import { Room, Equipment, Rental } from "@models";
 
 const equipmentsList = [
     { name: "Lit" },
@@ -41,7 +41,7 @@ export function NewRentalInfo() {
 
     const [selectedEquipment, setSelectedEquipment] = useState<Equipment[]>();
 
-    async function postNewRental(rentalInfo: NewRental) {
+    async function postNewRental(rentalInfo: Rental) {
         const res = await fetch(`${import.meta.env.VITE_API_ROUTE}newRental`, {
             method: "POST",
             headers: { "content-Type": "application/json" },
@@ -88,7 +88,7 @@ export function NewRentalInfo() {
         setRooms(newArrayOfRooms);
     };
 
-    const onSubmit = (newRental: NewRental) => {
+    const onSubmit = (newRental: Rental) => {
         const newRentalInfo = {
             id: newRental.id,
             rentalType: newRental.rentalType,
@@ -112,7 +112,7 @@ export function NewRentalInfo() {
     };
 
     return (
-        <Form<NewRental> submitLabel="Créer le bien" onSubmit={onSubmit}>
+        <Form<Rental> submitLabel="Créer le bien" onSubmit={onSubmit}>
             <div className={style.container}>
                 <Paper className={style.infoContainer}>
                     <h1 className={style.paperTitle} style={{ color: theme.palette.primary.main }}>
@@ -196,11 +196,3 @@ export function NewRentalInfo() {
         </Form>
     );
 }
-
-// export interface Address {
-//     street: string;
-//     streetInfo: string;
-//     zipcode: string;
-//     city: string;
-//     country: string;
-// }
