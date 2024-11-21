@@ -1,29 +1,31 @@
-import { NewRental } from "@models";
+import { Rental } from "@models";
 import mongoose from "mongoose";
 
-const rentalSchema = new mongoose.Schema<NewRental>({
+const rentalSchema = new mongoose.Schema<Rental>({
     id: {
         type: String,
         required: true,
     },
     rentalType: {
         type: String,
+        enum: ["maison", "studio", "appartement", "garage", "autre"],
         required: true,
     },
     rentalInfo: {
         type: String,
+        enum: ["meublé", "vide", "autre"],
         required: true,
     },
-    loyer: {
-        type: String,
+    rent: {
+        type: Number,
         required: true,
     },
-    charges: {
-        type: String,
+    rentalCharges: {
+        type: Number,
         required: true,
     },
     globalSize: {
-        type: String,
+        type: Number,
         required: true,
     },
 
@@ -47,10 +49,7 @@ const rentalSchema = new mongoose.Schema<NewRental>({
         type: String,
         required: true,
     },
-    rooms: {
-        type: String,
-        required: true,
-    },
+
     roomsInfo: {
         type: [Object],
         required: true,
