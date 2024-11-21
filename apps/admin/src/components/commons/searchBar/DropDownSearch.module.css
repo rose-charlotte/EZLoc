@@ -2,17 +2,9 @@
     width: auto;
 }
 
-.listItemContainer {
-    border: 1px solid rgb(79 70 229);
-    border-radius: 5px;
-    padding: 5px;
-    position: relative;
-    z-index: 1;
-    background-color: rgb(249 250 251);
-}
-
 .li {
     cursor: pointer;
+    list-style: none;
 }
 
 .elementContainer {
@@ -28,10 +20,6 @@
     padding: 0;
 }
 
-.mainContainer {
-    padding: 10px;
-    position: relative;
-}
 .choosenItemContainer {
     display: flex;
     flex-direction: row;
@@ -47,4 +35,7 @@
 
 .addBtn {
     width: 20px;
+}
+.listItemContainer {
+    padding: 10px;
 }
