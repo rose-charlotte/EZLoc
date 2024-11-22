@@ -9,6 +9,7 @@ import { connectDB } from "./config/database";
 
 import { UserRouter } from "./routes/userRouter";
 import { logger } from "./logger";
+import { RentalRouter } from "./routes/rentalRouter";
 
 connectDB();
 
@@ -27,6 +28,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(UserRouter);
+app.use(RentalRouter);
 
 app.get("/", (req, res) => {
     res.send("hello from the back end");
