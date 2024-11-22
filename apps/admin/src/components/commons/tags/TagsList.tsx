@@ -8,8 +8,8 @@ export function TagList(props: TagListProps) {
                     color="primary"
                     key={index}
                     label={tag}
-                    onClick={props.handleClick}
-                    onDelete={props.handleDelete}
+                    onClick={() => props.onClick(tag)}
+                    onDelete={() => props.onDelete(tag)}
                 />
             ))}
         </Stack>
@@ -18,6 +18,6 @@ export function TagList(props: TagListProps) {
 
 export interface TagListProps {
     tags: string[];
-    handleClick: () => void;
-    handleDelete: () => void;
+    onClick: (tag: string) => void;
+    onDelete: (tag: string) => void;
 }
