@@ -92,6 +92,7 @@ export function NewRentalInfo() {
         setRooms(newArrayOfRooms);
     };
 
+    //https://github.com/rose-charlotte/EZLoc/issues/95
     const handleTagClick = () => {};
 
     const onDeleteTag = (tag: string) => {
