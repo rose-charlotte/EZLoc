@@ -8,12 +8,12 @@ const rentalSchema = new mongoose.Schema<Rental>({
     },
     rentalType: {
         type: String,
-        enum: ["maison", "studio", "appartement", "garage", "autre"],
+        enum: ["home", "apartment", "studio", "garage", "other"],
         required: true,
     },
     rentalInfo: {
         type: String,
-        enum: ["meublé", "vide", "autre"],
+        enum: ["furnished", "empty", "other"],
         required: true,
     },
     rent: {
