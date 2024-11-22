@@ -7,7 +7,7 @@ import { FormField } from "../../../components/Form/FormField";
 import style from "./NewRental.module.css";
 import { useState } from "react";
 import { DropDownSearch } from "../../../components/commons/searchBar/DropDownSearch";
-import { TagsList } from "../../../components/commons/tags/TagsList";
+import { TagList } from "../../../components/commons/tags/TagList";
 import { Room, Equipment, Rental } from "@models";
 
 const equipmentsList = [
@@ -19,15 +19,16 @@ const equipmentsList = [
     { name: "Télé" },
 ];
 const rentalTypes = [
-    { name: "Maison", id: "maison" },
-    { name: "Studio", id: "studio" },
-    { name: "Appartement", id: "appartement" },
-    { name: "Garage", id: "garage" },
+    { label: "Maison", value: "Home" },
+    { label: "Studio", value: "studio" },
+    { label: "Appartement", value: "apartment" },
+    { label: "Garage", value: "garage" },
+    { label: "autre", value: "other" },
 ];
 const rentalInfo = [
-    { name: "Meublé", id: "meublé" },
-    { name: "Vide", id: "vide" },
-    { name: "Autre", id: "autre" },
+    { label: "Meublé", value: "furnished" },
+    { label: "Vide", value: "empty" },
+    { label: "Autre", value: "other" },
 ];
 
 export function NewRentalInfo() {
@@ -78,7 +79,10 @@ export function NewRentalInfo() {
     };
 
     const onAddRoom = () => {
-        setRooms(prev => [...(prev || []), { name: roomName!, size: roomSize!, equipments: selectedEquipment! }]);
+        setRooms(prev => [
+            ...(prev || []),
+            { name: roomName!, size: Number(roomSize), equipments: selectedEquipment! },
+        ]);
         setIsAddRoom(!isAddRoom);
         setSelectedEquipment([]);
     };
@@ -88,22 +92,26 @@ export function NewRentalInfo() {
         setRooms(newArrayOfRooms);
     };
 
+    const handleTagClick = () => {};
+
+    const onDeleteTag = (tag: string) => {
+        const newArayOfSelectedEquipement = selectedEquipment?.filter(equipment => equipment.name !== tag);
+        setSelectedEquipment(newArayOfSelectedEquipement);
+    };
+
     const onSubmit = (newRental: Rental) => {
         const newRentalInfo = {
             id: newRental.id,
             rentalType: newRental.rentalType,
             rentalInfo: newRental.rentalInfo,
-            loyer: newRental.loyer,
-            charges: newRental.charges,
+            rent: newRental.rent,
+            rentalCharges: newRental.rentalCharges,
             globalSize: newRental.globalSize,
-
             street: newRental.street,
             streetInfo: newRental.streetInfo,
             zipcode: newRental.zipcode,
             city: newRental.city,
             country: newRental.country,
-
-            rooms: newRental.rooms,
             roomsInfo: rooms!,
         };
 
@@ -160,7 +168,11 @@ export function NewRentalInfo() {
                                     onItemSelected={onItemSelected}
                                 />
                                 {selectedEquipment && (
-                                    <TagsList tags={selectedEquipment.map(equipment => equipment.name)} />
+                                    <TagList
+                                        tags={selectedEquipment.map(equipment => equipment.name)}
+                                        onClick={tag => handleTagClick(tag)}
+                                        onDelete={tag => onDeleteTag(tag)}
+                                    />
                                 )}
                                 <Button onClick={onAddRoom}>Ajouter</Button>
                             </div>
@@ -183,7 +195,7 @@ export function NewRentalInfo() {
                                 <AccordionDetails className={style.accordeonDetailsContainer}>
                                     <p>{room.size} m²</p>
                                     <div>
-                                        <TagsList tags={room.equipments.map(equipment => equipment.name)} />
+                                        <TagList tags={room.equipments.map(equipment => equipment.name)} />
                                     </div>
                                     <div onClick={() => removeRoom(room.name)}>
                                         <RemoveCircleIcon />
