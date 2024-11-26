@@ -8,8 +8,8 @@ export function TagList(props: TagListProps) {
                     color="primary"
                     key={index}
                     label={tag}
-                    onClick={() => props.onClick && props.onClick(tag)}
-                    onDelete={props.onDelete ? () => props.onDelete!(tag) : undefined}
+                    onClick={() => props.onClick?.(tag)}
+                    onDelete={() => props.onDelete?.(tag)}
                 />
             ))}
         </Stack>

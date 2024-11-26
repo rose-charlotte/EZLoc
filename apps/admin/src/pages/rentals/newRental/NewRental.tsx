@@ -93,11 +93,10 @@ export function NewRentalInfo() {
     };
 
     //https://github.com/rose-charlotte/EZLoc/issues/95
-    const handleTagClick = () => {};
+    const onEquipementTagClick = (tag: string) => {};
 
-    const onDeleteTag = (tag: string) => {
-        const newArayOfSelectedEquipement = selectedEquipment?.filter(equipment => equipment.name !== tag);
-        setSelectedEquipment(newArayOfSelectedEquipement);
+    const onEquipementTagDelete = (tag: string) => {
+        setSelectedEquipment(selectedEquipment?.filter(equipment => equipment.name !== tag));
     };
 
     const onSubmit = (newRental: Rental) => {
@@ -171,8 +170,8 @@ export function NewRentalInfo() {
                                 {selectedEquipment && (
                                     <TagList
                                         tags={selectedEquipment.map(equipment => equipment.name)}
-                                        onClick={tag => handleTagClick(tag)}
-                                        onDelete={tag => onDeleteTag(tag)}
+                                        onClick={tag => onEquipementTagClick(tag)}
+                                        onDelete={tag => onEquipementTagDelete(tag)}
                                     />
                                 )}
                                 <Button onClick={onAddRoom}>Ajouter</Button>
