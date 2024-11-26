@@ -16,15 +16,15 @@ export interface Rental {
 }
 
 enum RentalType {
-    Maison = "maison",
-    Appartement = "appartement",
+    Home = "home",
+    Apartment = "apartment",
     Studio = "studio",
     Garage = "garage",
-    Autre = "autre",
+    Other = "other",
 }
 
 enum RentalInfo {
-    Meublé = "meublé",
-    Vide = "vide",
-    Autre = "autre",
+    Furnished = "furnished",
+    Empty = "empty",
+    Other = "other",
 }
