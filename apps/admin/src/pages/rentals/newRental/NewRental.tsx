@@ -69,7 +69,7 @@ export function NewRentalInfo() {
         if (!newRoomSize) {
             return "";
         }
-        console.log(newRoomSize, parseInt(newRoomSize));
+
         setRoomSize(parseInt(newRoomSize));
     };
 
