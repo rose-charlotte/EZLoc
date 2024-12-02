@@ -7,7 +7,7 @@ import { FormField } from "../../../components/Form/FormField";
 import style from "./NewRental.module.css";
 import { useState } from "react";
 import { DropDownSearch } from "../../../components/commons/searchBar/DropDownSearch";
-import { TagsList } from "../../../components/commons/tags/TagsList";
+import { TagList } from "../../../components/commons/tags/TagsList";
 import { Room, Equipment, Rental } from "@models";
 
 const equipmentsList = [
@@ -37,7 +37,7 @@ export function NewRentalInfo() {
 
     const [rooms, setRooms] = useState<Room[]>();
     const [roomName, setRoomName] = useState<string>();
-    const [roomSize, setRoomSize] = useState<string>();
+    const [roomSize, setRoomSize] = useState<number>();
 
     const [selectedEquipment, setSelectedEquipment] = useState<Equipment[]>();
 
@@ -66,7 +66,11 @@ export function NewRentalInfo() {
             return;
         }
         const newRoomSize = (e.target as HTMLInputElement).value;
-        setRoomSize(newRoomSize);
+        if (!newRoomSize) {
+            return "";
+        }
+        console.log(newRoomSize, parseInt(newRoomSize));
+        setRoomSize(parseInt(newRoomSize));
     };
 
     const onAddItem = (name: string) => {
@@ -93,17 +97,14 @@ export function NewRentalInfo() {
             id: newRental.id,
             rentalType: newRental.rentalType,
             rentalInfo: newRental.rentalInfo,
-            loyer: newRental.loyer,
-            charges: newRental.charges,
+            rent: newRental.rent,
+            rentalCharges: newRental.rentalCharges,
             globalSize: newRental.globalSize,
-
             street: newRental.street,
             streetInfo: newRental.streetInfo,
             zipcode: newRental.zipcode,
             city: newRental.city,
             country: newRental.country,
-
-            rooms: newRental.rooms,
             roomsInfo: rooms!,
         };
 
@@ -160,7 +161,11 @@ export function NewRentalInfo() {
                                     onItemSelected={onItemSelected}
                                 />
                                 {selectedEquipment && (
-                                    <TagsList tags={selectedEquipment.map(equipment => equipment.name)} />
+                                    <TagList
+                                        tags={selectedEquipment.map(equipment => equipment.name)}
+                                        onClick={tag => console.log("click", tag)}
+                                        onDelete={tag => console.log("delete", tag)}
+                                    />
                                 )}
                                 <Button onClick={onAddRoom}>Ajouter</Button>
                             </div>
@@ -183,7 +188,13 @@ export function NewRentalInfo() {
                                 <AccordionDetails className={style.accordeonDetailsContainer}>
                                     <p>{room.size} m²</p>
                                     <div>
-                                        <TagsList tags={room.equipments.map(equipment => equipment.name)} />
+                                        {room.equipments && (
+                                            <TagList
+                                                tags={room.equipments.map(equipment => equipment.name)}
+                                                onClick={tag => console.log("click", tag)}
+                                                onDelete={tag => console.log("delete", tag)}
+                                            />
+                                        )}
                                     </div>
                                     <div onClick={() => removeRoom(room.name)}>
                                         <RemoveCircleIcon />
