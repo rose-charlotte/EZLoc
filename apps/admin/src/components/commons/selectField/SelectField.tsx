@@ -16,8 +16,8 @@ export function SelectField(props: SelectFieldProps) {
                 <InputLabel id={selectId}>{props.label}</InputLabel>
                 <Select labelId={selectId} name={props.name} id={selectId} value={value} onChange={handleChange}>
                     {props.options.map(option => (
-                        <MenuItem key={option.id} value={option.name}>
-                            {option.name}
+                        <MenuItem key={option.value} value={option.value}>
+                            {option.label}
                         </MenuItem>
                     ))}
                 </Select>
@@ -32,6 +32,6 @@ export interface SelectFieldProps {
     options: Option[];
 }
 export interface Option {
-    name: string;
-    id: string;
+    label: string;
+    value: string;
 }

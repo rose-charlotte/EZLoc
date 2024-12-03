@@ -7,7 +7,7 @@ import { FormField } from "../../../components/Form/FormField";
 import style from "./NewRental.module.css";
 import { useState } from "react";
 import { DropDownSearch } from "../../../components/commons/searchBar/DropDownSearch";
-import { TagList } from "../../../components/commons/tags/TagsList";
+import { TagList } from "../../../components/commons/tags/TagList";
 import { Room, Equipment, Rental } from "@models";
 
 const equipmentsList = [
@@ -19,15 +19,16 @@ const equipmentsList = [
     { name: "Télé" },
 ];
 const rentalTypes = [
-    { name: "Maison", id: "maison" },
-    { name: "Studio", id: "studio" },
-    { name: "Appartement", id: "appartement" },
-    { name: "Garage", id: "garage" },
+    { label: "Maison", value: "Home" },
+    { label: "Studio", value: "studio" },
+    { label: "Appartement", value: "apartment" },
+    { label: "Garage", value: "garage" },
+    { label: "autre", value: "other" },
 ];
 const rentalInfo = [
-    { name: "Meublé", id: "meublé" },
-    { name: "Vide", id: "vide" },
-    { name: "Autre", id: "autre" },
+    { label: "Meublé", value: "furnished" },
+    { label: "Vide", value: "empty" },
+    { label: "Autre", value: "other" },
 ];
 
 export function NewRentalInfo() {
@@ -82,7 +83,10 @@ export function NewRentalInfo() {
     };
 
     const onAddRoom = () => {
-        setRooms(prev => [...(prev || []), { name: roomName!, size: roomSize!, equipments: selectedEquipment! }]);
+        setRooms(prev => [
+            ...(prev || []),
+            { name: roomName!, size: Number(roomSize), equipments: selectedEquipment! },
+        ]);
         setIsAddRoom(!isAddRoom);
         setSelectedEquipment([]);
     };
@@ -90,6 +94,13 @@ export function NewRentalInfo() {
     const removeRoom = (name: string) => {
         const newArrayOfRooms = rooms?.filter(room => room.name !== name);
         setRooms(newArrayOfRooms);
+    };
+
+    //https://github.com/rose-charlotte/EZLoc/issues/95
+    const onEquipementTagClick = (tag: string) => {};
+
+    const onEquipementTagDelete = (tag: string) => {
+        setSelectedEquipment(selectedEquipment?.filter(equipment => equipment.name !== tag));
     };
 
     const onSubmit = (newRental: Rental) => {
@@ -163,8 +174,8 @@ export function NewRentalInfo() {
                                 {selectedEquipment && (
                                     <TagList
                                         tags={selectedEquipment.map(equipment => equipment.name)}
-                                        onClick={tag => console.log("click", tag)}
-                                        onDelete={tag => console.log("delete", tag)}
+                                        onClick={tag => onEquipementTagClick(tag)}
+                                        onDelete={tag => onEquipementTagDelete(tag)}
                                     />
                                 )}
                                 <Button onClick={onAddRoom}>Ajouter</Button>
@@ -188,13 +199,7 @@ export function NewRentalInfo() {
                                 <AccordionDetails className={style.accordeonDetailsContainer}>
                                     <p>{room.size} m²</p>
                                     <div>
-                                        {room.equipments && (
-                                            <TagList
-                                                tags={room.equipments.map(equipment => equipment.name)}
-                                                onClick={tag => console.log("click", tag)}
-                                                onDelete={tag => console.log("delete", tag)}
-                                            />
-                                        )}
+                                        <TagList tags={room.equipments.map(equipment => equipment.name)} />
                                     </div>
                                     <div onClick={() => removeRoom(room.name)}>
                                         <RemoveCircleIcon />
