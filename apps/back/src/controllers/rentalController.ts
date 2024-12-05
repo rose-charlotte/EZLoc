@@ -8,15 +8,6 @@ export const RentalController = {
         try {
             const newRental = req.body as Rental;
 
-            const rentalExists = await RentalModel.countDocuments({ id: newRental.id }, { limit: 1 });
-
-            if (rentalExists > 0) {
-                logger.info(`email ${newRental.id} was used multiple times to sign up`);
-                res.sendStatus(409);
-
-                return;
-            }
-
             const rental = new RentalModel(newRental);
 
             await rental.save();
@@ -26,6 +17,15 @@ export const RentalController = {
         } catch (err) {
             logger.error(err);
             res.sendStatus(500);
+        }
+    },
+
+    async getRentals(req: Request, res: Response) {
+        try {
+            const results = await RentalModel.find();
+            res.status(200).json(results);
+        } catch (err) {
+            logger.error(err);
         }
     },
 };
