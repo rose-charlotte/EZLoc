@@ -1,19 +1,19 @@
 import { Room } from "./Room";
 
 export interface Rental {
-    id: string;
+    id?: string;
     name: string;
-    rentalType: RentalType;
-    rentalInfo: RentalInfo;
+    rentalType?: RentalType;
+    rentalInfo?: RentalInfo;
     rent: number;
     rentalCharges: number;
-    globalSize: number;
-    street: string;
-    streetInfo: string;
-    zipcode: string;
-    city: string;
-    country: string;
-    roomsInfo: Room[];
+    globalSize?: number;
+    street?: string;
+    streetInfo?: string;
+    zipcode?: string;
+    city?: string;
+    country?: string;
+    roomsInfo?: Room[];
 }
 
 enum RentalType {

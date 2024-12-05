@@ -120,7 +120,6 @@ export function NewRentalInfo() {
         };
 
         postNewRental(newRentalInfo);
-        console.log(newRentalInfo);
     };
 
     return (
@@ -130,7 +129,7 @@ export function NewRentalInfo() {
                     <h1 className={style.paperTitle} style={{ color: theme.palette.primary.main }}>
                         Informations locative
                     </h1>
-                    <FormField label="identifiant du bien" name="id" />
+                    <FormField label="identifiant du bien" name="name" />
                     <SelectField label="Type de bien" name="rentalType" options={rentalTypes} />
                     <SelectField label="Type de location" name="rentalInfo" options={rentalInfo} />
                     <FormField label="Loyer HC" name="loyer" />
