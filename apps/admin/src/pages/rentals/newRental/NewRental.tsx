@@ -19,7 +19,7 @@ const equipmentsList = [
     { name: "Télé" },
 ];
 const rentalTypes = [
-    { label: "Maison", value: "Home" },
+    { label: "Maison", value: "home" },
     { label: "Studio", value: "studio" },
     { label: "Appartement", value: "apartment" },
     { label: "Garage", value: "garage" },
@@ -106,6 +106,7 @@ export function NewRentalInfo() {
     const onSubmit = (newRental: Rental) => {
         const newRentalInfo = {
             id: newRental.id,
+            name: newRental.name,
             rentalType: newRental.rentalType,
             rentalInfo: newRental.rentalInfo,
             rent: newRental.rent,
@@ -120,7 +121,7 @@ export function NewRentalInfo() {
         };
 
         postNewRental(newRentalInfo);
-        console.log(newRentalInfo);
+        console.log(newRental.rent);
     };
 
     return (
@@ -130,11 +131,11 @@ export function NewRentalInfo() {
                     <h1 className={style.paperTitle} style={{ color: theme.palette.primary.main }}>
                         Informations locative
                     </h1>
-                    <FormField label="identifiant du bien" name="id" />
+                    <FormField label="identifiant du bien" name="name" />
                     <SelectField label="Type de bien" name="rentalType" options={rentalTypes} />
                     <SelectField label="Type de location" name="rentalInfo" options={rentalInfo} />
-                    <FormField label="Loyer HC" name="loyer" />
-                    <FormField label="Charges" name="charges" />
+                    <FormField label="Loyer HC" name="rent" />
+                    <FormField label="Charges" name="rentalCharges" />
                 </Paper>
 
                 <Paper className={style.infoContainer}>
