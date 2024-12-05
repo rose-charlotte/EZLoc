@@ -105,7 +105,7 @@ export function NewRentalInfo() {
 
     const onSubmit = (newRental: Rental) => {
         const newRentalInfo = {
-            id: newRental.id,
+            name: newRental.name,
             rentalType: newRental.rentalType,
             rentalInfo: newRental.rentalInfo,
             rent: newRental.rent,
