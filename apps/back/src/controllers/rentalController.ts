@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
 import { RentalModel } from "../models/rental";
-import { NewRental } from "@models";
+import { Rental } from "@models";
 import { logger } from "../logger";
 
 export const RentalController = {
     async createRental(req: Request, res: Response): Promise<void> {
         try {
-            const newRental = req.body as NewRental;
+            const newRental = req.body as Rental;
 
             const rentalExists = await RentalModel.countDocuments({ id: newRental.id }, { limit: 1 });
 

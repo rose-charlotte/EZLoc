@@ -38,7 +38,7 @@ export function NewRentalInfo() {
 
     const [rooms, setRooms] = useState<Room[]>();
     const [roomName, setRoomName] = useState<string>();
-    const [roomSize, setRoomSize] = useState<string>();
+    const [roomSize, setRoomSize] = useState<number>();
 
     const [selectedEquipment, setSelectedEquipment] = useState<Equipment[]>();
 
@@ -67,7 +67,11 @@ export function NewRentalInfo() {
             return;
         }
         const newRoomSize = (e.target as HTMLInputElement).value;
-        setRoomSize(newRoomSize);
+        if (!newRoomSize) {
+            return "";
+        }
+
+        setRoomSize(parseInt(newRoomSize));
     };
 
     const onAddItem = (name: string) => {
