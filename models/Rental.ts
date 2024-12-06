@@ -14,6 +14,8 @@ export interface Rental {
     city?: string;
     country?: string;
     roomsInfo?: Room[];
+    paiement: boolean;
+    tenant: string;
 }
 
 enum RentalType {
