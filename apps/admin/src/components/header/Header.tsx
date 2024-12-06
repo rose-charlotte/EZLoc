@@ -19,9 +19,10 @@ export function Header() {
                 </NavLink>
                 <h2 style={theme.typography.h2}>{title}</h2>
                 <nav className={style.nav}>
-                    <Link to="/signUp" name="Sign Up" />
-                    <Link to="/signIn" name="Sign In" />
-                    <Link to="/newRental" name="Ajouter un bien locatif" />
+                    <Link to={EZLocRoutes.SignUp} name="Sign Up" />
+                    <Link to={EZLocRoutes.SignIn} name="Sign In" />
+                    <Link to={EZLocRoutes.NewRental} name="Ajouter un bien locatif" />
+                    <Link to={EZLocRoutes.Rental} name="Location" />
                 </nav>
             </div>
         </div>
@@ -41,8 +42,9 @@ const getTitleFromUrl = (route: EZLocRoutes) => {
         case EZLocRoutes.NewRental:
             return "Nouveau bien";
 
+        case EZLocRoutes.Rental:
+            return "Location";
         default:
             return route satisfies never;
     }
 };
-// className={style.title}
