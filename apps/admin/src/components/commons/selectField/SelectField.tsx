@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 
-import { Box, FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
 export function SelectField(props: SelectFieldProps) {
     const selectId = useId();
@@ -11,18 +11,23 @@ export function SelectField(props: SelectFieldProps) {
     };
 
     return (
-        <Box>
-            <FormControl sx={{ width: 210 }}>
-                <InputLabel id={selectId}>{props.label}</InputLabel>
-                <Select labelId={selectId} name={props.name} id={selectId} value={value} onChange={handleChange}>
-                    {props.options.map(option => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
-        </Box>
+        <FormControl sx={{ width: 210 }}>
+            <InputLabel id={selectId}>{props.label}</InputLabel>
+            <Select
+                labelId={selectId}
+                name={props.name}
+                id={selectId}
+                value={value}
+                label={props.label}
+                onChange={handleChange}
+            >
+                {props.options.map(option => (
+                    <MenuItem key={option.value} value={option.value}>
+                        {option.label}
+                    </MenuItem>
+                ))}
+            </Select>
+        </FormControl>
     );
 }
 
