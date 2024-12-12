@@ -1,8 +1,8 @@
 import { Rental } from "@models";
-import mongoose from "mongoose";
+import mongoose, { VirtualType } from "mongoose";
 
 const rentalSchema = new mongoose.Schema<Rental>({
-    id: {
+    name: {
         type: String,
         required: true,
     },
@@ -35,7 +35,6 @@ const rentalSchema = new mongoose.Schema<Rental>({
     },
     streetInfo: {
         type: String,
-        required: true,
     },
     zipcode: {
         type: String,
@@ -54,6 +53,14 @@ const rentalSchema = new mongoose.Schema<Rental>({
         type: [Object],
         required: true,
     },
+});
+
+rentalSchema.virtual("id").get(function () {
+    return this._id.toHexString();
+});
+
+rentalSchema.set("toJSON", {
+    virtuals: true,
 });
 
 export const RentalModel = mongoose.model("Rental", rentalSchema);
