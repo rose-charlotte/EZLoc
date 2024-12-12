@@ -3,5 +3,5 @@ import { RentalController } from "../controllers/rentalController";
 
 export const RentalRouter = express.Router();
 
-RentalRouter.post("/newRental", RentalController.createRental);
-RentalRouter.get("/home", RentalController.getRentals);
+RentalRouter.post("/rental", RentalController.createRental);
+RentalRouter.get("/rental", RentalController.getRentals);

@@ -4,21 +4,21 @@ import { Rental } from "@models";
 import { useState, useEffect } from "react";
 import { DropDownSearch } from "../../components/commons/searchBar/DropDownSearch";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { Tenant } from "../../../../../models/Tenant";
 
 const tenantList: Tenant[] = [
-    { name: "Bob", id: 1 },
-    { name: "Bobette", id: 2 },
+    { name: "Bob", id: "1" },
+    { name: "Bobette", id: "2" },
 ];
 
 export function Home() {
     const theme = useTheme();
 
     async function getRentals() {
-        const res = await fetch(`${import.meta.env.VITE_API_ROUTE}home`, {
+        const res = await fetch(`${import.meta.env.VITE_API_ROUTE}rental`, {
             method: "get",
         });
-        const mss = await res.json();
-        return mss;
+        return await res.json();
     }
 
     const [rentals, setRentals] = useState<Rental[]>([]);
@@ -33,17 +33,19 @@ export function Home() {
         fetchRentals();
     }, []);
 
-    const handleSelectedRental = (rental: Rental) => {};
-    const handleSelectedTenant = (tenant: Tenant) => {};
+    console.log("rentals:", rentals);
 
-    const setPaiement = (id: number) => {
+    const handleSelectedRental = (rental: Rental) => {};
+    const handleSelectedTenant = (tenant: string) => {};
+
+    const setPaiement = (id: string) => {
         const updatedRentals = rentals.map(rental =>
             rental.id === id ? { ...rental, paiement: !rental.paiement } : rental
         );
         setRentals(updatedRentals);
     };
 
-    const handleTenant = (rental: Rental) => {
+    const updateTenant = (rental: Rental) => {
         setOpenModal(true);
         setTenantName(rental.tenant);
     };
@@ -52,15 +54,16 @@ export function Home() {
     const onSelectedTenant = (tenant: Tenant) => {
         setTenantName(tenant.name);
     };
+
     return (
         <div className={style.mainContainer}>
             <Paper className={style.container}>
-                <h1 style={theme.typography.h2}>Vos biens locatifs</h1>
+                <h2 style={theme.typography.h2}>Vos biens locatifs</h2>
                 <div className={style.rentals}>
                     {rentals.map(rental => {
                         return (
                             <Paper
-                                key={rental.name}
+                                key={rental.id}
                                 className={style.rentalContainer}
                                 style={{ color: theme.palette.primary.main }}
                             >
@@ -68,17 +71,20 @@ export function Home() {
                                     <div onClick={() => handleSelectedRental(rental)}>
                                         <p className={style.rentalHeader}>{rental.name}</p>
                                         <p>
+                                            {/* Prévoir l'affichagen en plusieures langues https://github.com/rose-charlotte/EZLoc/issues/101 */}
                                             Loyer + charges: {rental.rent}€ + {rental.rentalCharges}€
                                         </p>
                                     </div>
 
                                     <div className={style.tenantInfo}>
+                                        {/* {rental.tenant.name && ( */}
                                         <p
                                             className={style.rentalHeader}
                                             onClick={() => handleSelectedTenant(rental.tenant)}
                                         >
                                             Occupant: {rental.tenant}
                                         </p>
+
                                         {rental.paiement ? (
                                             <p>paiement à jour </p>
                                         ) : (
@@ -87,8 +93,8 @@ export function Home() {
                                     </div>
                                 </div>
                                 <div className={style.rentalActions}>
-                                    <Button onClick={() => setPaiement(rental.id)}>Actualiser le paiement</Button>
-                                    <Button onClick={() => handleTenant(rental)}>Modifier l'occupant</Button>
+                                    <Button onClick={() => setPaiement(rental.id!)}>Actualiser le paiement</Button>
+                                    <Button onClick={() => updateTenant(rental)}>Modifier l'occupant</Button>
                                 </div>
                             </Paper>
                         );
@@ -98,7 +104,12 @@ export function Home() {
             {openModal && (
                 <div>
                     <h1>Locataire</h1>
-                    <span>Le locataire actuel est: {tenantName}</span>
+                    {tenantName ? (
+                        <span>Le locataire actuel est: {tenantName}</span>
+                    ) : (
+                        <span>Aucun occupant enregistré</span>
+                    )}
+
                     <DropDownSearch
                         items={tenantList}
                         label="nouveau locataire"
@@ -114,9 +125,4 @@ export function Home() {
             )}
         </div>
     );
-}
-
-export interface Tenant {
-    name: string;
-    id: number;
 }
