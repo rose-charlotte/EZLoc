@@ -1,0 +1,21 @@
+.container {
+    width: 30%;
+    width: 30%;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.salary {
+    display: flex;
+    gap: 10px;
+}
+.addField {
+    display: flex;
+    gap: 10px;
+}
+.date {
+    display: flex;
+    gap: 10px;
+}

@@ -32,6 +32,7 @@ export function FormField<T>(props: FormFieldProps<T>): ReactNode {
             case "email":
             case "given-name":
             case "family-name":
+            case "file":
                 return props.type;
 
             case "password":
@@ -58,6 +59,9 @@ export function FormField<T>(props: FormFieldProps<T>): ReactNode {
             case "password":
                 return "password";
 
+            case "file":
+                return "file";
+
             default:
                 return props.type satisfies never;
         }
@@ -69,7 +73,7 @@ export interface FormFieldProps<T> {
     labelHelp?: ReactNode;
     required?: boolean;
     name: keyof T;
-    type?: "email" | "text" | "password" | "given-name" | "family-name";
+    type?: "email" | "text" | "password" | "given-name" | "family-name" | "file";
     onChange?: (value: string | undefined) => void;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     value?: string;

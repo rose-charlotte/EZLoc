@@ -22,6 +22,7 @@ export function Header() {
                     <Link to="/signUp" name="Sign Up" />
                     <Link to="/signIn" name="Sign In" />
                     <Link to="/newRental" name="Ajouter un bien locatif" />
+                    <Link to={EZLocRoutes.NewTenant} name="Ajouter un locataire" />
                 </nav>
             </div>
         </div>
@@ -40,6 +41,9 @@ const getTitleFromUrl = (route: EZLocRoutes) => {
 
         case EZLocRoutes.NewRental:
             return "Nouveau bien";
+
+        case EZLocRoutes.NewTenant:
+            return "nouveau locataire";
 
         default:
             return route satisfies never;
