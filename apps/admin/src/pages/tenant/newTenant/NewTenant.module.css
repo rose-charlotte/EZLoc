@@ -1,5 +1,11 @@
+.mainContainer {
+    display: flex;
+    gap: 2%;
+    margin: 3%;
+    justify-content: space-between;
+}
+
 .container {
-    width: 30%;
     width: 30%;
     padding: 32px;
     display: flex;

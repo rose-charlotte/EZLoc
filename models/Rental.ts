@@ -2,6 +2,7 @@ import { Room } from "./Room";
 
 export interface Rental {
     id: string;
+    name: string;
     rentalType: RentalType;
     rentalInfo: RentalInfo;
     rent: number;
