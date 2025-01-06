@@ -1,6 +1,8 @@
 import { SignUpRequest } from "@models";
 import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
+import style from "./SignUpForm.module.css";
+import { Paper } from "@mui/material";
 
 export function SignUpForm() {
     //github.com/rose-charlotte/EZLoc/issues/68
@@ -25,15 +27,21 @@ export function SignUpForm() {
         postSignUp(signUp);
     };
     return (
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <Paper className={style.container}>
             <Form<SignUpForm> onSubmit={onSubmit} submitLabel="Création de compte">
-                <FormField<SignUpForm> label="Nom" name="lastName" />
-                <FormField<SignUpForm> label="Prénom" name="firstName" />
-                <FormField<SignUpForm> label="Email" name="email" />
-                <FormField<SignUpForm> label="Mot de passe" name="password" type="password" />
-                <FormField<SignUpForm> label="Confirmation du mot de passe" name="passwordConfirm" type="password" />
+                <div className={style.formContainer}>
+                    <FormField<SignUpForm> label="Nom" name="lastName" />
+                    <FormField<SignUpForm> label="Prénom" name="firstName" />
+                    <FormField<SignUpForm> label="Email" name="email" />
+                    <FormField<SignUpForm> label="Mot de passe" name="password" type="password" />
+                    <FormField<SignUpForm>
+                        label="Confirmation du mot de passe"
+                        name="passwordConfirm"
+                        type="password"
+                    />
+                </div>
             </Form>
-        </div>
+        </Paper>
     );
 }
 
