@@ -32,3 +32,19 @@ enum RentalInfo {
     Empty = "empty",
     Other = "other",
 }
+
+export type NewRentalRequest = Pick<
+    Rental,
+    | "name"
+    | "rentalType"
+    | "rentalInfo"
+    | "rent"
+    | "rentalCharges"
+    | "globalSize"
+    | "street"
+    | "streetInfo"
+    | "zipcode"
+    | "city"
+    | "country"
+    | "roomsInfo"
+>;

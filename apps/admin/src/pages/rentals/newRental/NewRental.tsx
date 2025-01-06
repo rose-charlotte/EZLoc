@@ -8,7 +8,7 @@ import style from "./NewRental.module.css";
 import { useState } from "react";
 import { DropDownSearch } from "../../../components/commons/searchBar/DropDownSearch";
 import { TagList } from "../../../components/commons/tags/TagList";
-import { Room, Equipment, Rental } from "@models";
+import { Room, Equipment, Rental, NewRentalRequest } from "@models";
 
 const equipmentsList = [
     { name: "Lit" },
@@ -211,19 +211,3 @@ export function NewRentalInfo() {
         </Form>
     );
 }
-
-type NewRentalRequest = Pick<
-    Rental,
-    | "name"
-    | "rentalType"
-    | "rentalInfo"
-    | "rent"
-    | "rentalCharges"
-    | "globalSize"
-    | "street"
-    | "streetInfo"
-    | "zipcode"
-    | "city"
-    | "country"
-    | "roomsInfo"
->;
