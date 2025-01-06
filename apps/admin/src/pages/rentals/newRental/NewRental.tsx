@@ -42,7 +42,7 @@ export function NewRentalInfo() {
 
     const [selectedEquipment, setSelectedEquipment] = useState<Equipment[]>();
 
-    async function postNewRental(rentalInfo: PartialRental) {
+    async function postNewRental(rentalInfo: NewRentalRequest) {
         const res = await fetch(`${import.meta.env.VITE_API_ROUTE}rental`, {
             method: "POST",
             headers: { "content-Type": "application/json" },
@@ -103,7 +103,7 @@ export function NewRentalInfo() {
         setSelectedEquipment(selectedEquipment?.filter(equipment => equipment.name !== tag));
     };
 
-    const onSubmit = (newRental: PartialRental) => {
+    const onSubmit = (newRental: NewRentalRequest) => {
         const newRentalInfo = {
             name: newRental.name,
             rentalType: newRental.rentalType,
@@ -212,4 +212,18 @@ export function NewRentalInfo() {
     );
 }
 
-type PartialRental = Partial<Rental>;
+type NewRentalRequest = Pick<
+    Rental,
+    | "name"
+    | "rentalType"
+    | "rentalInfo"
+    | "rent"
+    | "rentalCharges"
+    | "globalSize"
+    | "street"
+    | "streetInfo"
+    | "zipcode"
+    | "city"
+    | "country"
+    | "roomsInfo"
+>;

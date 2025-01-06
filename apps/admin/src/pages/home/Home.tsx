@@ -15,6 +15,7 @@ export function Home() {
     const theme = useTheme();
 
     async function getRentals() {
+        //https://github.com/rose-charlotte/EZLoc/issues/103 Gestion des erreurs à faire
         const res = await fetch(`${import.meta.env.VITE_API_ROUTE}rental`, {
             method: "get",
         });
@@ -33,17 +34,8 @@ export function Home() {
         fetchRentals();
     }, []);
 
-    console.log("rentals:", rentals);
-
     const handleSelectedRental = (rental: Rental) => {};
     const handleSelectedTenant = (tenant: string) => {};
-
-    const setPaiement = (id: string) => {
-        const updatedRentals = rentals.map(rental =>
-            rental.id === id ? { ...rental, paiement: !rental.paiement } : rental
-        );
-        setRentals(updatedRentals);
-    };
 
     const updateTenant = (rental: Rental) => {
         setOpenModal(true);
@@ -77,7 +69,6 @@ export function Home() {
                                     </div>
 
                                     <div className={style.tenantInfo}>
-                                        {/* {rental.tenant.name && ( */}
                                         <p
                                             className={style.rentalHeader}
                                             onClick={() => handleSelectedTenant(rental.tenant)}
@@ -93,7 +84,6 @@ export function Home() {
                                     </div>
                                 </div>
                                 <div className={style.rentalActions}>
-                                    <Button onClick={() => setPaiement(rental.id!)}>Actualiser le paiement</Button>
                                     <Button onClick={() => updateTenant(rental)}>Modifier l'occupant</Button>
                                 </div>
                             </Paper>
