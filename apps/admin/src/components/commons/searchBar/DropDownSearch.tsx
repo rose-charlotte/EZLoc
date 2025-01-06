@@ -3,7 +3,7 @@ import style from "./DropDownSearch.module.css";
 import { DropDownSearchList, DropDownSearchListOption } from "./DropDownSearchList";
 import { DropDownSearchBar } from "./DropDownSearchBar";
 import { removeAccentsAndTolowercase } from "../../../utils/StringUtils";
-import { useTheme } from "@mui/material";
+import { Button, useTheme } from "@mui/material";
 
 export function DropDownSearch<T>(props: DropDownSearchProps<T>) {
     const theme = useTheme();
@@ -30,16 +30,6 @@ export function DropDownSearch<T>(props: DropDownSearchProps<T>) {
 
     const filteredOptions = filter ? filterItems(options, filter) : options;
 
-    const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key !== "Enter") {
-            return;
-        }
-
-        const newElementName = e.currentTarget.value;
-
-        props.onAddItem(newElementName);
-    };
-
     return (
         <div>
             <DropDownSearchBar
@@ -53,7 +43,9 @@ export function DropDownSearch<T>(props: DropDownSearchProps<T>) {
                     <div className={style.listItemContainer} style={{ backgroundColor: theme.palette.primary.light }}>
                         <DropDownSearchList<T> options={filteredOptions} onItemSelected={selectItem} />
 
-                        <input type="text" onKeyDown={onKeyDown} placeholder="Ajouter un élément" />
+                        {props.addButton && (
+                            <Button onClick={() => props.onAddElementClick()}>Ajouter un élément</Button>
+                        )}
                     </div>
                 )}
             </div>
@@ -61,12 +53,11 @@ export function DropDownSearch<T>(props: DropDownSearchProps<T>) {
     );
 }
 
-export interface DropDownSearchProps<T> {
+export type DropDownSearchProps<T> = {
     items: T[];
     placeholder?: string;
     label: string;
     getLabel: (item: T) => string;
     getKey: (item: T) => Key;
-    onAddItem: (name: string) => void;
     onItemSelected: (item: T) => void;
-}
+} & ({ addButton: false } | { addButton: true; onAddElementClick: () => void });

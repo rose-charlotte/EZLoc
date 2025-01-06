@@ -74,9 +74,8 @@ export function NewRentalInfo() {
         setRoomSize(parseInt(newRoomSize));
     };
 
-    const onAddItem = (name: string) => {
-        setEquipments(prev => [...prev, { name }]);
-    };
+    // https://github.com/rose-charlotte/EZLoc/issues/105 Faire la page de création pour ajouter un nouvel élément
+    const onAddItem = () => {};
 
     const onItemSelected = (item: Equipment) => {
         setSelectedEquipment(prev => [...(prev || []), item]);
@@ -168,8 +167,9 @@ export function NewRentalInfo() {
                                     items={equipments}
                                     getLabel={item => item.name}
                                     getKey={item => item.name}
-                                    onAddItem={onAddItem}
                                     onItemSelected={onItemSelected}
+                                    addButton
+                                    onAddElementClick={onAddItem}
                                 />
                                 {selectedEquipment && (
                                     <TagList
