@@ -1,29 +1,28 @@
 import { Rental } from "./Rental";
-import { Dayjs } from "dayjs";
 
 export interface Tenant {
     id: string;
     lastName: string;
     firstName: string;
-    dateOfBirth: Dayjs | null;
+    dateOfBirth: Date | undefined;
     mail: string;
     phone: string;
     employment: string;
     salary: number;
     currency: Currency;
     comment: string;
-    files: Files[];
-    entryDate: Dayjs | null;
-    exitDate: Dayjs | null;
+    files: FileInfo[];
+    entryDate: Date | undefined;
+    exitDate: Date | undefined;
     rental: Partial<Rental>;
 }
 enum Currency {
-    Euro = "euro",
+    Euros = "euros",
     Francs = "francs",
     Dollars = "dollars",
 }
 
-export interface Files {
+export interface FileInfo {
     fileName: string;
     file: File;
 }

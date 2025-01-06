@@ -13,10 +13,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Dayjs } from "dayjs";
-import { Files, Rental, Tenant } from "@models";
+import { FileInfo, Rental, Tenant } from "@models";
 
 const money = [
-    { label: "€", value: "euro" },
+    { label: "€", value: "euros" },
     { label: "CHF", value: "francs" },
     { label: "$", value: "dollars" },
 ];
@@ -25,7 +25,7 @@ export function NewTenant() {
     const theme = useTheme();
 
     const [file, setFile] = useState<File | null>(null);
-    const [files, setFiles] = useState<Files[] | null>(null);
+    const [files, setFiles] = useState<FileInfo[] | null>(null);
     const [fileName, setFileName] = useState<string | undefined>("");
     const [dateOfBirth, setDateOfBirth] = useState<Dayjs | null>(null);
     const [entryDate, setEntryDate] = useState<Dayjs | null>(null);
@@ -49,13 +49,11 @@ export function NewTenant() {
     }, []);
 
     async function postNewTenant(tenant: Tenant) {
-        const res = await fetch(`${import.meta.env.VITE_API_ROUTE}tenant`, {
+        await fetch(`${import.meta.env.VITE_API_ROUTE}tenant`, {
             method: "POST",
             headers: { "content-Type": "application/json" },
             body: JSON.stringify(tenant),
         });
-        const mss = await res.json();
-        console.log("la reponse du back", mss);
     }
 
     const onChange = (value: File | null) => {
@@ -64,10 +62,9 @@ export function NewTenant() {
         }
     };
 
-    const onAddFile = () => {
-        const value = file;
+    const onAddFile = (value: File | null) => {
         if (value) {
-            const newFile: Files = { fileName: fileName || "", file: value };
+            const newFile: FileInfo = { fileName: fileName || "", file: value };
 
             setFiles(prev => (prev ? [...prev, newFile] : [newFile]));
         }
@@ -85,9 +82,9 @@ export function NewTenant() {
     const onSubmit = (newTenant: Tenant) => {
         newTenant.files = files || [];
         newTenant.rental = rental;
-        newTenant.dateOfBirth = dateOfBirth;
-        newTenant.entryDate = entryDate;
-        newTenant.exitDate = exitDate;
+        newTenant.dateOfBirth = dateOfBirth?.toDate();
+        newTenant.entryDate = entryDate?.toDate();
+        newTenant.exitDate = exitDate?.toDate();
         postNewTenant(newTenant);
     };
 
@@ -135,7 +132,7 @@ export function NewTenant() {
                             }}
                             placeholder="Ajouter un fichier"
                         />
-                        <Button onClick={onAddFile}>Ajouter</Button>
+                        <Button onClick={() => onAddFile}>Ajouter</Button>
                     </div>
 
                     {files &&
@@ -153,8 +150,8 @@ export function NewTenant() {
                             label={rental.name || "Assigner un logement"}
                             getLabel={rental => rental.name!}
                             getKey={rental => rental.id!}
-                            onAddItem={() => console.log("addItem")}
                             onItemSelected={onSelectedRental}
+                            addButton={false}
                         />
                     </div>
                     <div className={style.date}>

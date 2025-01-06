@@ -1,6 +1,5 @@
-import { Tenant, Files } from "@models";
+import { Tenant, FileInfo } from "@models";
 import mongoose from "mongoose";
-import { Dayjs } from "dayjs";
 
 const tenantSchema = new mongoose.Schema<Tenant>({
     lastName: {
@@ -12,7 +11,7 @@ const tenantSchema = new mongoose.Schema<Tenant>({
         required: true,
     },
     dateOfBirth: {
-        type: Dayjs,
+        type: Date,
         required: true,
     },
     mail: {
@@ -43,10 +42,10 @@ const tenantSchema = new mongoose.Schema<Tenant>({
         type: [Object],
     },
     entryDate: {
-        type: Dayjs,
+        type: Date,
     },
     exitDate: {
-        type: Dayjs,
+        type: Date,
     },
     rental: {
         type: Object,
