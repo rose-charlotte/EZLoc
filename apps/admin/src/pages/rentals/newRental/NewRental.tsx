@@ -8,7 +8,7 @@ import style from "./NewRental.module.css";
 import { useState } from "react";
 import { DropDownSearch } from "../../../components/commons/searchBar/DropDownSearch";
 import { TagList } from "../../../components/commons/tags/TagList";
-import { Room, Equipment, Rental } from "@models";
+import { Room, Equipment, Rental, NewRentalRequest } from "@models";
 
 const equipmentsList = [
     { name: "Lit" },
@@ -42,8 +42,8 @@ export function NewRentalInfo() {
 
     const [selectedEquipment, setSelectedEquipment] = useState<Equipment[]>();
 
-    async function postNewRental(rentalInfo: Rental) {
-        const res = await fetch(`${import.meta.env.VITE_API_ROUTE}newRental`, {
+    async function postNewRental(rentalInfo: NewRentalRequest) {
+        const res = await fetch(`${import.meta.env.VITE_API_ROUTE}rental`, {
             method: "POST",
             headers: { "content-Type": "application/json" },
             body: JSON.stringify(rentalInfo),
@@ -102,9 +102,9 @@ export function NewRentalInfo() {
         setSelectedEquipment(selectedEquipment?.filter(equipment => equipment.name !== tag));
     };
 
-    const onSubmit = (newRental: Rental) => {
+    const onSubmit = (newRental: NewRentalRequest) => {
         const newRentalInfo = {
-            id: newRental.id,
+            name: newRental.name,
             rentalType: newRental.rentalType,
             rentalInfo: newRental.rentalInfo,
             rent: newRental.rent,
@@ -119,7 +119,6 @@ export function NewRentalInfo() {
         };
 
         postNewRental(newRentalInfo);
-        console.log(newRentalInfo);
     };
 
     return (
@@ -129,7 +128,7 @@ export function NewRentalInfo() {
                     <h1 className={style.paperTitle} style={{ color: theme.palette.primary.main }}>
                         Informations locative
                     </h1>
-                    <FormField label="identifiant du bien" name="id" />
+                    <FormField label="Nom du bien" name="name" />
                     <SelectField label="Type de bien" name="rentalType" options={rentalTypes} />
                     <SelectField label="Type de location" name="rentalInfo" options={rentalInfo} />
                     <FormField label="Loyer HC" name="loyer" />
