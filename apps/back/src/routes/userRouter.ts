@@ -5,3 +5,4 @@ export const UserRouter = express.Router();
 
 UserRouter.post("/user", UserController.createUser);
 UserRouter.post("/login", UserController.login);
+UserRouter.get("/profile", UserController.getUserProfile);

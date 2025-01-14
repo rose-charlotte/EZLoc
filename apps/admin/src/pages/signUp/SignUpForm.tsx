@@ -4,7 +4,8 @@ import { FormField } from "../../components/Form/FormField";
 
 export function SignUpForm() {
     //github.com/rose-charlotte/EZLoc/issues/68
-    async function postSignUp(userInfo: SignUpRequest) {
+
+    async function signUp(userInfo: SignUpRequest) {
         const res = await fetch(`${import.meta.env.VITE_API_ROUTE}user`, {
             method: "POST",
             headers: { "content-Type": "application/json" },
@@ -20,10 +21,11 @@ export function SignUpForm() {
             return;
         }
 
-        const signUp: SignUpRequest = { ...otherProps };
+        const signUpInfo: SignUpRequest = { ...otherProps };
 
-        postSignUp(signUp);
+        signUp(signUpInfo);
     };
+
     return (
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <Form<SignUpForm> onSubmit={onSubmit} submitLabel="Création de compte">
