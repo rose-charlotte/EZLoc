@@ -1,10 +1,9 @@
-import { Button, Paper, useTheme } from "@mui/material";
+import { Button, Paper, TextField, useTheme, Input } from "@mui/material";
 import { Form } from "../../../components/Form/Form";
 import { FormField } from "../../../components/Form/FormField";
 import style from "./NewTenant.module.css";
 import { SelectField } from "../../../components/commons/selectField/SelectField";
 import { useEffect, useState } from "react";
-import { MuiFileInput } from "mui-file-input";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -14,6 +13,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Dayjs } from "dayjs";
 import { FileInfo, Rental, Tenant } from "@models";
+import { relative } from "path";
 
 const money = [
     { label: "€", value: "euros" },
@@ -24,7 +24,7 @@ const money = [
 export function NewTenant() {
     const theme = useTheme();
 
-    const [file, setFile] = useState<File | null>(null);
+    const [file, setFile] = useState<File | null | undefined>();
     const [files, setFiles] = useState<FileInfo[] | null>(null);
     const [fileName, setFileName] = useState<string | undefined>("");
     const [dateOfBirth, setDateOfBirth] = useState<Dayjs | null>(null);
@@ -56,21 +56,20 @@ export function NewTenant() {
         });
     }
 
-    const onChange = (value: File | null) => {
-        if (value) {
-            setFile(value);
-        }
+    const onChange = (value: File | null | undefined) => {
+        setFile(value);
     };
 
-    const onAddFile = (value: File | null) => {
-        if (value) {
-            const newFile: FileInfo = { fileName: fileName || "", file: value };
-
-            setFiles(prev => (prev ? [...prev, newFile] : [newFile]));
-        }
-        setFile(null);
-        setFileName("");
+    const onAddFile = () => {
+        // checker la validité du champ fileName avec .checkValidity()
+        // if (value) {
+        //     const newFile: FileInfo = { fileName: fileName || "", file: value };
+        //     setFiles(prev => (prev ? [...prev, newFile] : [newFile]));
+        // }
+        // setFile(null);
+        // setFileName("");
     };
+
     const onAddFileName = (name: string | undefined) => {
         setFileName(name);
     };
@@ -89,35 +88,96 @@ export function NewTenant() {
     };
 
     return (
-        <Form<Tenant> submitLabel="Créer le locataire" onSubmit={onSubmit}>
-            <div className={style.mainContainer}>
-                <Paper className={style.container}>
-                    <h3 style={{ color: theme.palette.primary.main }}>Informations personnelles</h3>
-                    <FormField label="Nom" name="lastName" />
-                    <FormField label="Prénom" name="firstName" />
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
-                            label="Date de naissance"
-                            value={entryDate}
-                            onChange={newValue => setDateOfBirth(newValue)}
-                        />
-                    </LocalizationProvider>
-                    <FormField label="Email" name="mail" />
-                    <FormField label="Téléphone" name="phone" />
-                    <FormField label="Situation professionnelle" name="employment" />
-                    <div className={style.salary}>
-                        <FormField label="Revenus" name="salary" />
-                        <SelectField label="Devise" name="currency" options={money} />
-                    </div>
-                    <FormField label="Commentaire" name="comment" />
-                </Paper>
-                <Paper className={style.container}>
-                    <h3 style={{ color: theme.palette.primary.main }}>Documents</h3>
+        <>
+            <Form<Tenant> submitLabel="Créer le locataire" onSubmit={onSubmit}>
+                <div className={style.mainContainer}>
+                    <Paper className={style.container}>
+                        <h3 style={{ color: theme.palette.primary.main }}>Informations personnelles</h3>
+                        <FormField label="Nom" name="lastName" />
+                        <FormField label="Prénom" name="firstName" />
+                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                            <DatePicker
+                                label="Date de naissance"
+                                value={entryDate}
+                                onChange={newValue => setDateOfBirth(newValue)}
+                            />
+                        </LocalizationProvider>
+                        <FormField label="Email" name="mail" />
+                        <FormField label="Téléphone" name="phone" />
+                        <FormField label="Situation professionnelle" name="employment" />
+                        <div className={style.salary}>
+                            <FormField label="Revenus" name="salary" />
+                            <SelectField label="Devise" name="currency" options={money} />
+                        </div>
+                        <FormField label="Commentaire" name="comment" />
+                    </Paper>
+                    <Paper className={style.container}>
+                        <h3 style={{ color: theme.palette.primary.main }}>Information logement</h3>
+                        <div className={style.rentalInfo}>
+                            <DropDownSearch
+                                items={rentals}
+                                label={rental.name || "Assigner un logement"}
+                                getLabel={rental => rental.name!}
+                                getKey={rental => rental.id!}
+                                onItemSelected={onSelectedRental}
+                                addButton={false}
+                            />
+                        </div>
+                        <div className={style.date}>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Date d'entée"
+                                    value={entryDate}
+                                    onChange={newValue => setEntryDate(newValue)}
+                                />
+                            </LocalizationProvider>
+                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                <DatePicker
+                                    label="Date de sortie"
+                                    value={exitDate}
+                                    onChange={newValue => setExitDate(newValue)}
+                                />
+                            </LocalizationProvider>
+                        </div>
+                    </Paper>
+                    <Paper className={style.container}>
+                        <h3 style={{ color: theme.palette.primary.main }}>Documents</h3>
 
-                    <div className={style.addField}>
-                        <FormField label="nom du fichier" name="fileName" onChange={onAddFileName} />
-                        <MuiFileInput
-                            label="Ajouter un fichier"
+                        {files &&
+                            files.map(file => (
+                                <li key={file.fileName}>
+                                    {file.fileName} {file.file.name}
+                                </li>
+                            ))}
+
+                        <div className={style.addField}>
+                            <TextField
+                                label="Nom du fichier"
+                                value={fileName}
+                                onChange={e => setFileName(e.currentTarget.value)}
+                            />
+                            <label
+                                style={{
+                                    flexGrow: 1,
+                                    position: "relative",
+                                }}
+                            >
+                                <input type="file" onChange={e => onChange(e.target.files?.[0])} />
+                            </label>
+
+                            <Button onClick={() => onAddFile}>Ajouter</Button>
+                        </div>
+                    </Paper>
+                </div>
+            </Form>
+        </>
+    );
+}
+
+{
+    /* <MuiFileInput
+                            // label="Ajouter un fichier"
+                            autoSave=""
                             variant="outlined"
                             name="file"
                             value={file}
@@ -131,47 +191,5 @@ export function NewTenant() {
                                 onClick: () => setFile(null),
                             }}
                             placeholder="Ajouter un fichier"
-                        />
-                        <Button onClick={() => onAddFile}>Ajouter</Button>
-                    </div>
-
-                    {files &&
-                        files.map(file => (
-                            <li key={file.fileName}>
-                                {file.fileName} {file.file.name}
-                            </li>
-                        ))}
-                </Paper>
-                <Paper className={style.container}>
-                    <h3 style={{ color: theme.palette.primary.main }}>Information logement</h3>
-                    <div className={style.rentalInfo}>
-                        <DropDownSearch
-                            items={rentals}
-                            label={rental.name || "Assigner un logement"}
-                            getLabel={rental => rental.name!}
-                            getKey={rental => rental.id!}
-                            onItemSelected={onSelectedRental}
-                            addButton={false}
-                        />
-                    </div>
-                    <div className={style.date}>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                label="Date d'entée"
-                                value={entryDate}
-                                onChange={newValue => setEntryDate(newValue)}
-                            />
-                        </LocalizationProvider>
-                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                            <DatePicker
-                                label="Date de sortie"
-                                value={exitDate}
-                                onChange={newValue => setExitDate(newValue)}
-                            />
-                        </LocalizationProvider>
-                    </div>
-                </Paper>
-            </div>
-        </Form>
-    );
+                        /> */
 }
