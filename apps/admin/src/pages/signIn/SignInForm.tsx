@@ -1,43 +1,38 @@
 import { Form } from "../../components/Form/Form";
 import { FormField } from "../../components/Form/FormField";
-import { SignInErrorCode, SignInRequest, SignInResponse } from "@models";
-import { useState } from "react";
+import { SignInRequest } from "@models";
+
+import { useTokenMutation } from "../../data/userApi";
+import { useNavigate } from "react-router-dom";
 
 export function SignInForm() {
-    const [errorMessage, setErrorMessage] = useState<string>();
-
+    const navigate = useNavigate();
     // https://github.com/rose-charlotte/EZLoc/issues/57
 
-    async function login(info: SignInRequest) {
-        setErrorMessage(undefined);
+    const [login, { isError }] = useTokenMutation();
 
-        const response = await fetch(`${import.meta.env.VITE_API_ROUTE}login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(info),
-            credentials: "include",
-        });
+    // console.log(isError);
 
-        const result: SignInResponse = await response.json();
+    async function onLoginSubmit(info: SignInRequest) {
+        if (!info.email || !info.password) {
+            return;
+        }
 
-        if (result.success) {
-            // Add accessToken to the store
-            //https://github.com/rose-charlotte/EZLoc/issues/72
-            alert("ok");
-        } else {
-            // Create styled element to manage error message
-            // https://github.com/rose-charlotte/EZLoc/issues/73
-            setErrorMessage(getErrorMessage(result.errorCode));
+        try {
+            await login(info).unwrap();
+            navigate("/");
+        } catch {
+            //         // https://github.com/rose-charlotte/EZLoc/issues/73
         }
     }
 
     return (
         <>
             <div>
-                {errorMessage && <div>{errorMessage}</div>}
+                {isError && <div>mot de passe ou identifiant invalide</div>}
 
                 <div>
-                    <Form<SignInRequest> onSubmit={login} submitLabel="Connexion">
+                    <Form<SignInRequest> onSubmit={onLoginSubmit} submitLabel="Connexion">
                         <FormField<SignInRequest> label="Identifiant" name="email" required type="email" />
                         <FormField<SignInRequest>
                             label="Mot de passe"
@@ -59,14 +54,4 @@ export function SignInForm() {
             </div>
         </>
     );
-}
-
-function getErrorMessage(errorCode: SignInErrorCode): string {
-    switch (errorCode) {
-        case SignInErrorCode.InvalidUsernameOrPassword:
-            return "Mot de passe ou utilisateur invalide";
-
-        default:
-            return errorCode satisfies never;
-    }
 }

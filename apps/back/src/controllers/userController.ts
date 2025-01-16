@@ -4,8 +4,8 @@ import { generateRefreshToken, generateAccessToken } from "../jwtUtils";
 import bcrypt from "bcrypt";
 import { UserModel } from "../models/user";
 import { logger } from "../logger";
-import { SignInErrorCode, SignInRequest, SignInResponse, SignUpRequest } from "@models";
-
+import { GetUserProfileResponse, SignInErrorCode, SignInRequest, SignInResponse, SignUpRequest } from "@models";
+import jwt, { JwtPayload } from "jsonwebtoken";
 const saltRounds = 10;
 export const UserController = {
     async createUser(req: Request, res: Response) {
@@ -80,5 +80,24 @@ export const UserController = {
             success: true,
             accessToken,
         });
+    },
+
+    async getUserProfile(req: Request, res: Response<GetUserProfileResponse>) {
+        const token = req.headers.authorization?.split("Bearer")[1].trim();
+        const decodedToken = jwt.decode(token!);
+        if (token) {
+            const user = await UserModel.findOne({ email: (decodedToken as JwtPayload).email });
+            if (!user) {
+                logger.warn(`user with email ${(decodedToken as JwtPayload).email} was not found`);
+                return;
+            }
+            console.log(user);
+            res.status(200).json({
+                email: user.email,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                userId: user._id.toHexString(),
+            });
+        }
     },
 };

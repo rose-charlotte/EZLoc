@@ -4,3 +4,4 @@ export * from "./SignUpRequest";
 export * from "./Equipment";
 export * from "./Rental";
 export * from "./Room";
+export * from "./GetUserProfileResponse";
