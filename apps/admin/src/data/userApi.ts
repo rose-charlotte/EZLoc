@@ -1,4 +1,4 @@
-import { SignInRequest, SignInResponse } from "@models";
+import { GetUserProfileResponse, SignInRequest, SignInResponse } from "@models";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store/store";
 import { selectToken } from "../store/slices/userSlice";
@@ -20,7 +20,7 @@ export const userApi = createApi({
         credentials: "include",
     }),
     endpoints: builder => ({
-        profile: builder.mutation<SignUpResponse, void>({
+        profile: builder.mutation<GetUserProfileResponse, void>({
             query: () => ({
                 url: "profile",
                 method: "GET",
@@ -36,12 +36,5 @@ export const userApi = createApi({
         }),
     }),
 });
-
-export interface SignUpResponse {
-    userId: string;
-    email: string;
-    firstName: string;
-    lastName: string;
-}
 
 export const { useProfileMutation, useTokenMutation } = userApi;
