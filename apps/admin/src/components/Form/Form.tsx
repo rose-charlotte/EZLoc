@@ -22,7 +22,7 @@ export function Form<T>(props: FormProps<T>): ReactNode {
     };
 
     return (
-        <Box component="form" onSubmit={onSubmit} method="POST">
+        <Box component="form" onSubmit={onSubmit} method="POST" className={props.className}>
             {props.children}
 
             <div className={style.btn}>
@@ -35,6 +35,7 @@ export function Form<T>(props: FormProps<T>): ReactNode {
 }
 
 export interface FormProps<T> {
+    className?: string;
     children: ReactNode[] | ReactNode;
     submitLabel: string;
     onSubmit: (model: T) => void;

@@ -3,4 +3,5 @@ export const enum EZLocRoutes {
     SignIn = "/signIn",
     SignUp = "/signUp",
     NewRental = "/newRental",
+    NewTenant = "/newTenant",
 }

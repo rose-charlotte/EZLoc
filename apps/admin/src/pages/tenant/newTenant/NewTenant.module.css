@@ -1,0 +1,39 @@
+.mainContainer {
+    display: flex;
+    gap: 2%;
+    margin: 3%;
+    justify-content: space-between;
+}
+
+.container {
+    width: 30%;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.salary {
+    display: flex;
+    gap: 10px;
+}
+.addField {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.date {
+    display: flex;
+    gap: 10px;
+}
+
+.fileInput input[type="file"]::file-selector-button {
+    background-color: #6c85bd;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    padding: 6px;
+}
+.fileInput input[type="file"]::file-selector-button :focus {
+    border: none;
+}
