@@ -13,7 +13,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Dayjs } from "dayjs";
 import { FileInfo, Rental, Tenant } from "@models";
-import { relative } from "path";
 
 const money = [
     { label: "€", value: "euros" },
@@ -62,16 +61,14 @@ export function NewTenant() {
 
     const onAddFile = () => {
         // checker la validité du champ fileName avec .checkValidity()
-        // if (value) {
-        //     const newFile: FileInfo = { fileName: fileName || "", file: value };
-        //     setFiles(prev => (prev ? [...prev, newFile] : [newFile]));
-        // }
-        // setFile(null);
-        // setFileName("");
-    };
+        //https://github.com/rose-charlotte/EZLoc/issues/108
 
-    const onAddFileName = (name: string | undefined) => {
-        setFileName(name);
+        if (file) {
+            const newFile: FileInfo = { fileName: fileName || "", file: file };
+            setFiles(prev => (prev ? [...prev, newFile] : [newFile]));
+        }
+        setFile(null);
+        setFileName("");
     };
 
     const onSelectedRental = (rental: Partial<Rental>) => {
@@ -85,8 +82,10 @@ export function NewTenant() {
         newTenant.entryDate = entryDate?.toDate();
         newTenant.exitDate = exitDate?.toDate();
         postNewTenant(newTenant);
+        console.log(newTenant);
     };
 
+    console.log(file);
     return (
         <>
             <Form<Tenant> submitLabel="Créer le locataire" onSubmit={onSubmit}>
@@ -156,16 +155,20 @@ export function NewTenant() {
                                 value={fileName}
                                 onChange={e => setFileName(e.currentTarget.value)}
                             />
-                            <label
-                                style={{
-                                    flexGrow: 1,
-                                    position: "relative",
-                                }}
-                            >
-                                <input type="file" onChange={e => onChange(e.target.files?.[0])} />
-                            </label>
+                            {/* <label className={style.fileInputLabel}>
+                                <input
+                                    className={style.fileInput}
+                                    type="file"
+                                    onChange={e => onChange((e.target as HTMLInputElement).files?.[0])}
+                                />
+                            </label> */}
+                            <TextField
+                                className={style.fileInput}
+                                type="file"
+                                onChange={e => onChange((e.target as HTMLInputElement).files?.[0])}
+                            ></TextField>
 
-                            <Button onClick={() => onAddFile}>Ajouter</Button>
+                            <Button onClick={onAddFile}>Ajouter</Button>
                         </div>
                     </Paper>
                 </div>
