@@ -2,9 +2,9 @@ import { View, Text, TextInput } from "react-native";
 
 export default function FormField(props: FormFieldProps) {
     return (
-        <View className={` space-y-2 ${props.otherStyles}`}>
+        <View className={`space-y-2 ${props.otherStyles}`}>
             <Text>{props.title}</Text>
-            <View className="">
+            <View>
                 <TextInput placeholder={props.title} />
             </View>
         </View>
