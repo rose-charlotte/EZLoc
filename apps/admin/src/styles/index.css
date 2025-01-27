@@ -2,3 +2,7 @@
 body {
     font-family: "roboto";
 }
+#root {
+    display: flex;
+    flex-direction: column;
+}
