@@ -9,13 +9,12 @@ export function Home() {
 
     useEffect(() => {
         if (!data && !isError) {
-            profile().then(payload => console.log(payload));
+            profile();
             return;
         }
 
-        if (isError) {
-            console.log("voila le bug");
-        }
+        //Faire la gestion d'erreur
+        //https://github.com/rose-charlotte/EZLoc/issues/111
     }, [user, data, isError, profile]);
 
     return <>{user ? <p>user name: {user.firstName}</p> : <p>aucun user</p>}</>;

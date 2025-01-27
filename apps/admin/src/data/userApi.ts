@@ -17,7 +17,6 @@ export const userApi = createApi({
 
             return headers;
         },
-        credentials: "include",
     }),
     endpoints: builder => ({
         profile: builder.mutation<GetUserProfileResponse, void>({
