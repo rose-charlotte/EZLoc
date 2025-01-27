@@ -1,5 +1,45 @@
-.nav {
+.mainContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+}
+
+.container {
+    display: flex;
+    width: 30%;
+    flex-direction: column;
+    margin: 3%;
+    padding: 10px;
+}
+
+.rentalContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 10px;
+    padding: 10px;
+}
+.rentalHeader {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.rentalInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.rentalActions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.tenantInfo {
+    display: flex;
+    flex-direction: column;
+    align-content: flex-end;
+    align-items: flex-end;
 }

@@ -1,7 +1,9 @@
 import { Room } from "./Room";
+import { Tenant } from "./Tenant";
 
 export interface Rental {
     id: string;
+    name: string;
     rentalType: RentalType;
     rentalInfo: RentalInfo;
     rent: number;
@@ -13,6 +15,8 @@ export interface Rental {
     city: string;
     country: string;
     roomsInfo: Room[];
+    paiement: boolean;
+    tenant: string;
 }
 
 enum RentalType {
@@ -28,3 +32,19 @@ enum RentalInfo {
     Empty = "empty",
     Other = "other",
 }
+
+export type NewRentalRequest = Pick<
+    Rental,
+    | "name"
+    | "rentalType"
+    | "rentalInfo"
+    | "rent"
+    | "rentalCharges"
+    | "globalSize"
+    | "street"
+    | "streetInfo"
+    | "zipcode"
+    | "city"
+    | "country"
+    | "roomsInfo"
+>;
