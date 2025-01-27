@@ -12,7 +12,6 @@ const tenantSchema = new mongoose.Schema<Tenant>({
     },
     dateOfBirth: {
         type: Date,
-        required: true,
     },
     mail: {
         type: String,

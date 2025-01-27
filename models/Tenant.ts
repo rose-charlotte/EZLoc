@@ -4,7 +4,7 @@ export interface Tenant {
     id: string;
     lastName: string;
     firstName: string;
-    dateOfBirth: Date | undefined;
+    dateOfBirth?: Date;
     mail: string;
     phone: string;
     employment: string;
@@ -12,10 +12,13 @@ export interface Tenant {
     currency: Currency;
     comment: string;
     files: FileInfo[];
-    entryDate: Date | undefined;
+    entryDate?: Date;
     exitDate: Date | undefined;
     rental: Partial<Rental>;
 }
+
+//A modifier ultérieurement pour pouvoir choisir la currency désirée directement dans la base données
+//https://github.com/rose-charlotte/EZLoc/issues/110
 enum Currency {
     Euros = "euros",
     Francs = "francs",
